@@ -1,0 +1,6 @@
+{
+  "samples": [
+    { "symptoms": "cough, sore throat, nasal congestion", "topk": ["Upper respiratory infection", "Strep throat", "Allergic rhinitis"] },
+    { "symptoms": "fever, rash, joint pain", "topk": ["Viral exanthem", "Lyme disease"] }
+  ]
+}

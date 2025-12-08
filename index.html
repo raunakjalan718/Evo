@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EvoDoc - Personalized AI treatment assistant</title>
+  <link rel="icon" href="assets/favicon.svg">
+  <link rel="preload" href="assets/doc.png" as="image">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body data-page="home">
+  <!-- Page Loader -->
+  <div id="loader" class="loader">
+    <div class="spinner"></div>
+    <p>Preparing your personalized care...</p>
+  </div>
+
+  <!-- Exit Overlay (route transitions) -->
+  <div id="exitOverlay" class="exit-overlay"></div>
+
+  <!-- Custom Cursor & Particles -->
+  <div id="cursor" class="cursor"></div>
+  <canvas id="cursorTrail"></canvas>
+
+  <!-- Top Nav -->
+  <header class="nav">
+    <a href="#" class="brand link-exit">
+      <img src="assets/logo.svg" alt="EvoDoc" class="logo">
+      <span>EvoDoc</span>
+    </a>
+    <nav>
+      <a href="#overview">Overview</a>
+      <a href="#doctors">Doctors</a>
+      <a href="#patients">Patients</a>
+      <a href="#tech">Tech</a>
+      <a href="#demo">Demo</a>
+      <a href="#collab">Collaborate</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-card">
+      <header class="hero-header">
+        <span class="hero-launch">LAUNCHING SOON</span>
+        <div class="hero-meta">
+          <span class="hero-meta-label">Adaptive Care Engine</span>
+          <span class="hero-meta-date">Beta Access &bull; Q1 2026</span>
+        </div>
+      </header>
+
+      <div class="hero-body">
+        <div class="hero-wordmark">
+          <span class="hero-word hero-word-evo">EVO</span>
+          <span class="hero-word hero-word-doc">DOC</span>
+        </div>
+        <div class="hero-figure parallax">
+          <div class="hero-halo"></div>
+          <img class="hero-doc" src="assets/doc.png" alt="Doctor standing with EvoDoc interface" />
+        </div>
+        <div class="hero-info">
+          <h1 class="hero-heading">Personalized AI treatment assistant</h1>
+          <p class="hero-lede">
+            EvoDoc blends longitudinal health data, clinician intuition, and adaptive machine learning
+            to unlock proactive, context-aware care.
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-primary link-exit" href="details.html">Explore the workflow</a>
+            <a class="btn btn-ghost" href="#demo">Preview the mock demo</a>
+          </div>
+        </div>
+      </div>
+
+      <footer class="hero-footer">
+        <p>
+          Built with clinicians to reduce diagnostic drift, highlight unseen risk, and capture the nuance
+          that templates miss.
+        </p>
+        <p>
+          Secure-by-design architecture keeps sensitive signals on-device until you choose to sync with
+          your clinical systems.
+        </p>
+      </footer>
+    </div>
+    <div class="scroll-cue">Scroll</div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section id="overview" class="section container reveal">
+    <div class="grid two">
+      <div>
+        <h3>Why EvoDoc now?</h3>
+        <p>
+          Health data is scattered and time is tight. EvoDoc condenses signals from symptoms,
+          structured records and context to suggest **clinically-plausible** differentials and next steps.
+          You stay in control - EvoDoc simply reduces cognitive load and surfaces nuances most systems miss.
+        </p>
+      </div>
+      <div class="card glass">
+        <ul class="checks">
+          <li>Structured symptom intake with guardrails</li>
+          <li>Model suggestions + transparent rationale</li>
+          <li>Audit trail and versioning</li>
+          <li>Designed for clinician oversight - not autopilot</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOCTORS -->
+  <section id="doctors" class="section container reveal">
+    <h3>For Doctors</h3>
+    <div class="grid three">
+      <div class="card hover-rise">
+        <h4>Signal triage</h4>
+        <p>Summarizes symptom clusters and flags red-flags for escalation, reducing unnecessary workups.</p>
+      </div>
+      <div class="card hover-rise">
+        <h4>Explainable suggestions</h4>
+        <p>Each suggestion links to the contributing features so your clinical reasoning remains first-class.</p>
+      </div>
+      <div class="card hover-rise">
+        <h4>Fits your workflow</h4>
+        <p>Designed for short visits: fast intake, instant hypotheses, and easy documentation snippets.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PATIENTS -->
+  <section id="patients" class="section container reveal">
+    <h3>For Patients</h3>
+    <div class="grid three">
+      <div class="card hover-rise">
+        <h4>Personal over generic</h4>
+        <p>Your care plan respects allergies, meds, and goals, not one-size-fits-all handouts.</p>
+      </div>
+      <div class="card hover-rise">
+        <h4>Clarity</h4>
+        <p>Plain-language summaries and next steps you can actually follow - no jargon overload.</p>
+      </div>
+      <div class="card hover-rise">
+        <h4>Safer choices</h4>
+        <p>Medication suggestions cross-checked with known risks and contraindication hints.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH -->
+  <section id="tech" class="section container reveal">
+    <h3>For Tech Folks</h3>
+    <div class="grid three">
+      <div class="card hover-rise">
+        <h4>Tabular + NLP pipeline</h4>
+        <p>Sparse binary symptom vectors + notes embeddings. Blend of gradient boosting and linear models.</p>
+      </div>
+      <div class="card hover-rise">
+        <h4>Versioned artifacts</h4>
+        <p>Reproducible datasets, model cards, and top-k eval with ROC/PR tracking. CI-ready.</p>
+      </div>
+      <div class="card hover-rise">
+        <h4>Privacy-first</h4>
+        <p>Local demos, de-identification scaffolds, and clear separation of PHI vs derived features.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEMO -->
+  <section id="demo" class="section container reveal">
+    <div class="grid two">
+      <div>
+        <h3>Interactive Demo (mock)</h3>
+        <p>Type a few symptoms and press “Suggest”. This is a front-end mock to visualize the final flow.</p>
+        <div class="demo-panel card">
+          <label>Symptoms (comma-separated)</label>
+          <input id="symptomsInput" class="input" placeholder="cough, sore throat, nasal congestion">
+          <div class="demo-actions">
+            <button id="demoSuggest" class="btn btn-primary">Suggest</button>
+            <button id="demoClear" class="btn btn-ghost">Clear</button>
+          </div>
+          <div id="demoLoading" class="line-loader" hidden></div>
+          <div id="demoResults" class="result-list"></div>
+        </div>
+      </div>
+      <div class="card glass">
+        <h4>What you'll see</h4>
+        <ul class="checks">
+          <li>Top-k differentials with confidences</li>
+          <li>Simple rationale chips</li>
+          <li>Example “next step” nudges</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLLABORATE -->
+  <section id="collab" class="section container reveal">
+    <h3>Collaborate with EvoDoc</h3>
+    <p>Tell us where you'd like to contribute. Your answers stay private on your device unless you export and email them.</p>
+
+    <form id="collabForm" class="card form-grid">
+      <div class="full">
+        <label>Your name</label>
+        <input name="name" required class="input" placeholder="Dr. Jane Doe / Alex K">
+      </div>
+
+      <div>
+        <label>Email</label>
+        <input name="email" type="email" required class="input" placeholder="you@example.com">
+      </div>
+
+      <div>
+        <label>Role / Domain</label>
+        <select name="domain" class="input" required>
+          <option value="">Select…</option>
+          <option>Mentor (similar domain)</option>
+          <option>Startup / Project partner</option>
+          <option>Dataset provider (EHR)</option>
+          <option>Data engineering</option>
+          <option>ML engineering</option>
+          <option>Clinical advisor</option>
+          <option>General contributor</option>
+        </select>
+      </div>
+
+      <div class="full">
+        <label>Briefly describe how you'd like to help</label>
+        <textarea name="pitch" class="input" rows="4" placeholder="What excites you about EvoDoc?"></textarea>
+      </div>
+
+      <div class="full grid two">
+        <div>
+          <label>What you'd like in return</label>
+          <input name="return" class="input" placeholder="Equity, co-authorship, access, etc.">
+        </div>
+        <div>
+          <label>Time you can commit (hrs/week)</label>
+          <input name="time" class="input" type="number" min="0" step="1" placeholder="5">
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-primary" type="submit">Submit interest</button>
+        <button class="btn btn-ghost" type="button" id="exportCollab">Export as JSON</button>
+      </div>
+      <p id="collabMsg" class="form-msg" role="status"></p>
+    </form>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section container reveal">
+    <h3>Contact</h3>
+    <div class="card glass contact">
+      <p><strong>Email:</strong> <a href="mailto:jalan.raunak@outlook.com">jalan.raunak@outlook.com</a></p>
+      <p><strong>X:</strong> <a href="https://x.com/notso0p" target="_blank" rel="noopener">x.com/notso0p</a></p>
+      <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/jalan-raunak/" target="_blank" rel="noopener">linkedin.com/in/jalan-raunak</a></p>
+    </div>
+  </section>
+
+  <!-- FEEDBACK -->
+  <section id="feedback" class="section container reveal">
+    <h3>Feedback</h3>
+    <form id="feedbackForm" class="card form-grid">
+      <div>
+        <label>Name</label>
+        <input name="name" class="input" required placeholder="Your name">
+      </div>
+      <div>
+        <label>Email</label>
+        <input name="email" type="email" class="input" required placeholder="you@example.com">
+      </div>
+      <div class="full">
+        <label>Your feedback / questions</label>
+        <textarea name="comment" class="input" rows="4" required></textarea>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" type="submit">Send</button>
+        <button class="btn btn-ghost" type="button" id="exportFeedback">Export (owner only)</button>
+      </div>
+      <p id="fbMsg" class="form-msg" role="status"></p>
+    </form>
+  </section>
+
+  <footer class="footer container">
+    <p>&copy; <span id="year"></span> EvoDoc. All rights reserved.</p>
+  </footer>
+
+  <script src="js/cursor.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/demo.js"></script>
+  <script src="js/forms.js"></script>
+</body>
+</html>
+
+
+
+

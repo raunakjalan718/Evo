@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>EvoDoc — How it works</title>
+  <link rel="icon" href="assets/favicon.svg">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body class="theme-yellow" data-page="details">
+  <div id="loader" class="loader"><div class="spinner"></div></div>
+  <div id="exitOverlay" class="exit-overlay"></div>
+  <div id="cursor" class="cursor"></div>
+  <canvas id="cursorTrail"></canvas>
+
+  <header class="nav">
+    <a href="index.html" class="brand link-exit">
+      <img src="assets/logo.svg" class="logo" alt="EvoDoc"><span>EvoDoc</span>
+    </a>
+  </header>
+
+  <section class="section container narrow reveal">
+    <h1>How EvoDoc Works</h1>
+    <p class="lede">
+      EvoDoc ingests a structured symptom checklist, optional notes, and known risk factors.
+      We transform this into features (mostly sparse binaries) and run fast, calibrated models
+      to produce a transparent **Top-k differential** with rationale chips.
+    </p>
+
+    <h3>Workflow</h3>
+    <ol class="steps">
+      <li>Intake symptoms (patient or MA). Structured + free-text.</li>
+      <li>Feature build: binary symptom vector, derived flags (e.g., fever+rigors), optional embeddings from notes.</li>
+      <li>Model pass: gradient boosting / linear baselines; calibrated probabilities.</li>
+      <li>Explain: show contributing features and safe-guards (red-flags, interactions).</li>
+      <li>Document: copyable snippet + audit trail for supervision.</li>
+    </ol>
+
+    <h3>Safety</h3>
+    <ul>
+      <li>Not a diagnosis. Designed for **clinician-in-the-loop** use only.</li>
+      <li>Soft rules for red-flag escalation and medication interactions preview.</li>
+      <li>Model cards and drift monitoring before any real deployment.</li>
+    </ul>
+
+    <div class="spacer"></div>
+    <a class="btn btn-primary link-exit" href="index.html#demo">Back to demo</a>
+  </section>
+
+  <script src="js/cursor.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+:root{
+  --yellow:#F3FF47;
+  --charcoal:#272D2D;
+  --slate:#3A3F3F;
+  --gray:#8A8D8B;
+  --fog:#DFDFD7;
+  --sand:#F4F4EB;
+  --white:#fff;
+  --mist:#FBFBF5;
+
+  --bg: var(--fog);
+  --fg: var(--charcoal);
+  --card-bg: rgba(255,255,255,.82);
+  --card-stroke: rgba(39,45,45,.06);
+
+  --radius-xl: 22px;
+  --radius: 14px;
+  --shadow: 0 8px 30px rgba(0,0,0,.12);
+}
+
+@font-face{
+  font-family: InterVar;
+  src: local("Inter"), local("Inter var");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+html,body{
+  background:
+    radial-gradient(140% 120% at 10% 5%, rgba(243,255,71,.45), transparent 55%),
+    linear-gradient(145deg, var(--sand) 0%, var(--fog) 55%, var(--mist) 100%);
+  color: var(--charcoal);
+  font-family: InterVar, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-size: 19px;
+  line-height: 1.7;
+  position:relative;
+  min-height:100%;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background: rgba(0,0,0,.04);
+  pointer-events:none;
+  mix-blend-mode:multiply;
+  z-index:-1;
+}
+
+.display{ font-size: clamp(40px, 6vw, 84px); line-height: .95; letter-spacing:-0.02em; font-weight: 800; }
+.sub{ font-weight:600; margin-top:.4rem; font-size: clamp(18px,2.5vw,28px); }
+.kicker{ text-transform:uppercase; letter-spacing:.14em; font-weight:700; font-size:12px; opacity:.75; }
+.mark{ background: var(--charcoal); color: var(--yellow); padding:.1em .4em; border-radius:10px; }
