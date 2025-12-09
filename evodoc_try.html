@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EvoDoc | AI Treatment Assistant</title>
+    <style>
+        /* --- 1. RESET & VARIABLES --- */
+        :root {
+            --neon-green: #e1ff00; /* The signature neon color */
+            --dark-bg-start: #4a503d; /* Murky olive green */
+            --dark-bg-end: #1b1e16;   /* Deep dark green/black */
+            --text-dark: #111;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at center, var(--dark-bg-start) 0%, var(--dark-bg-end) 100%);
+            height: 100vh;
+            color: white;
+            overflow: hidden; /* Lock scroll for the "poster" look */
+        }
+
+        /* --- 2. NAVIGATION --- */
+        nav {
+            background-color: var(--neon-green);
+            padding: 1rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-dark);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            font-weight: 900;
+        }
+
+        .logo-icon {
+            background: black;
+            color: var(--neon-green);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .nav-links {
+            display: list-item;
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links li { cursor: pointer; transition: opacity 0.2s; }
+        .nav-links li:hover { opacity: 0.6; }
+
+        /* --- 3. HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding-top: 60px; /* Offset for fixed nav */
+        }
+
+        /* The Huge Background Text */
+        .giant-text {
+            position: absolute;
+            font-size: 24vw; /* Responsive giant size */
+            font-weight: 900;
+            line-height: 1;
+            color: transparent;
+            -webkit-text-stroke: 2px rgba(225, 255, 0, 0.5); /* Neon outline */
+            z-index: 1;
+            user-select: none;
+            text-align: center;
+            width: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* The 3D Character */
+        .doctor-img {
+            position: relative;
+            z-index: 5; /* In front of text */
+            height: 70vh; /* Adjust based on your actual image */
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+            pointer-events: none;
+        }
+
+        /* --- 4. FLOATING ELEMENTS --- */
+        
+        /* "Launching Soon" Badge - Top Left */
+        .badge-launch {
+            position: absolute;
+            top: 20%;
+            left: 15%;
+            background-color: var(--neon-green);
+            color: black;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px rgba(225, 255, 0, 0.4);
+            z-index: 10;
+        }
+
+        /* Technical Info - Top Right */
+        .tech-info {
+            position: absolute;
+            top: 20%;
+            right: 15%;
+            text-align: right;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
+            letter-spacing: 1.5px;
+            line-height: 1.6;
+            text-transform: uppercase;
+            z-index: 10;
+        }
+
+        /* Main Description Text (Your provided text) */
+        .description-box {
+            position: absolute;
+            bottom: 5%;
+            width: 100%;
+            text-align: center;
+            z-index: 10;
+            padding: 0 20px;
+        }
+
+        .description-box h2 {
+            font-size: 1.2rem;
+            color: var(--neon-green);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .description-box p {
+            max-width: 600px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <span class="logo-icon">+</span> EVODOC
+        </div>
+        <ul class="nav-links">
+            <li>Overview</li>
+            <li>Doctors</li>
+            <li>Patients</li>
+            <li>Tech</li>
+            <li>Demo</li>
+            <li>Collaborate</li>
+            <li>Contact</li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        
+        <div class="giant-text">EVODOC</div>
+
+        <div class="badge-launch">LAUNCHING SOON</div>
+        
+        <div class="tech-info">
+            Adaptive Care Engine<br>
+            Beta Access - Q1 2026
+        </div>
+
+        <img src="public/assets/doc.png" alt="3D Doctor Character" class="doctor-img" style="mix-blend-mode: multiply; filter: contrast(1.2);">
+        <div class="description-box">
+            <h2>Personalized AI Treatment Assistant</h2>
+            <p>EvoDoc blends longitudinal health data, clinician intuition, and adaptive machine learning to unlock proactive, context-aware care.</p>
+        </div>
+
+    </section>
+
+</body>
+</html>
