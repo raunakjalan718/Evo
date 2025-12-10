@@ -6,21 +6,22 @@
   <title>EvoDoc - Personalized AI treatment assistant</title>
   
   <link rel="icon" href="https://media.githubusercontent.com/media/raunakjalan718/Evo/refs/heads/main/public/assets/favicon.svg">
-  <link rel="stylesheet" href="public/css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body data-page="home">
   
   <div id="loader" class="loader">
-    <div style="text-align:center;">
-      <div class="spinner" style="margin:0 auto 15px;"></div>
-      <p>Loading EvoDoc...</p>
-    </div>
+    <div class="spinner"></div>
+    <p>Initializing Adaptive Care Engine...</p>
   </div>
+
+  <div id="cursor" class="cursor"></div>
+  <canvas id="cursorTrail"></canvas>
 
   <header class="nav">
     <a href="#" class="brand">
-      <img src="https://media.githubusercontent.com/media/raunakjalan718/Evo/refs/heads/main/public/assets/logo.svg" alt="Logo" class="logo">
-      <span>EvoDoc</span>
+      <img src="https://media.githubusercontent.com/media/raunakjalan718/Evo/refs/heads/main/public/assets/logo.svg" alt="EvoDoc" class="logo">
+      <span>EVODOC</span>
     </a>
     <nav>
       <a href="#overview">Overview</a>
@@ -34,19 +35,38 @@
   </header>
 
   <section class="hero">
-    
-    <div class="hero-banner">
-      <h1 class="hero-text">EVODOC</h1>
+    <div class="hero-card">
       
-      <div class="hero-doc-wrapper reveal">
-        <img class="hero-doc" src="https://media.githubusercontent.com/media/raunakjalan718/Evo/refs/heads/main/public/assets/doc.png" alt="EvoDoc Character" />
+      <div class="hero-header">
+        <span class="hero-launch">LAUNCHING SOON</span>
+        <div class="hero-meta">
+          <span class="hero-meta-label">Adaptive Care Engine</span>
+          <span class="hero-meta-date">Beta Access &bull; Q1 2026</span>
+        </div>
+      </div>
+
+      <div class="hero-body">
+        <div class="hero-wordmark">
+          <span class="hero-word">EVO</span>
+          <span class="hero-word">DOC</span>
+        </div>
+        <div class="hero-figure parallax">
+          <img class="hero-doc" src="https://media.githubusercontent.com/media/raunakjalan718/Evo/refs/heads/main/public/assets/doc.png" alt="AI Doctor Assistant" />
+        </div>
+        <div class="hero-info">
+          <h1 class="hero-heading">Personalized AI treatment assistant</h1>
+          <p class="hero-lede">
+            EvoDoc blends longitudinal health data, clinician intuition, and adaptive machine learning
+            to unlock proactive, context-aware care.
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#demo">Preview the Demo</a>
+            <a class="btn btn-ghost" href="#tech">How it works</a>
+          </div>
+        </div>
       </div>
     </div>
-
-    <div class="hero-bottom-card reveal">
-      <h2>Personalized AI<br>treatment assistant</h2>
-    </div>
-
+    <div class="scroll-cue">Scroll</div>
   </section>
 
   <section id="overview" class="section container reveal">
@@ -54,7 +74,7 @@
       <div>
         <h3>Why EvoDoc now?</h3>
         <p>
-          Health data is scattered. EvoDoc condenses signals from symptoms,
+          Health data is scattered and time is tight. EvoDoc condenses signals from symptoms,
           structured records, and context to suggest <strong>clinically-plausible</strong> differentials.
           You stay in control—EvoDoc reduces cognitive load.
         </p>
@@ -75,11 +95,11 @@
     <div class="grid three">
       <div class="card hover-rise">
         <h4>Signal triage</h4>
-        <p>Summarizes symptom clusters and flags red-flags for escalation.</p>
+        <p>Summarizes symptom clusters and flags red-flags for escalation, reducing unnecessary workups.</p>
       </div>
       <div class="card hover-rise">
         <h4>Explainable suggestions</h4>
-        <p>Each suggestion links to contributing features so reasoning remains first-class.</p>
+        <p>Each suggestion links to contributing features so your clinical reasoning remains first-class.</p>
       </div>
       <div class="card hover-rise">
         <h4>Fits your workflow</h4>
@@ -93,15 +113,33 @@
     <div class="grid three">
       <div class="card hover-rise">
         <h4>Personal over generic</h4>
-        <p>Care plans that respect allergies, meds, and goals—not one-size-fits-all.</p>
+        <p>Care plans that respect allergies, meds, and goals—not one-size-fits-all handouts.</p>
       </div>
       <div class="card hover-rise">
         <h4>Clarity</h4>
-        <p>Plain-language summaries and next steps you can actually follow.</p>
+        <p>Plain-language summaries and next steps you can actually follow without jargon.</p>
       </div>
       <div class="card hover-rise">
         <h4>Safer choices</h4>
-        <p>Medication suggestions cross-checked with known risks.</p>
+        <p>Medication suggestions cross-checked with known risks and contraindications.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="tech" class="section container reveal">
+    <h3>For Tech Folks</h3>
+    <div class="grid three">
+      <div class="card hover-rise">
+        <h4>Tabular + NLP pipeline</h4>
+        <p>Sparse binary symptom vectors + notes embeddings. Gradient boosting meets linear models.</p>
+      </div>
+      <div class="card hover-rise">
+        <h4>Versioned artifacts</h4>
+        <p>Reproducible datasets, model cards, and top-k eval with ROC/PR tracking.</p>
+      </div>
+      <div class="card hover-rise">
+        <h4>Privacy-first</h4>
+        <p>Local demos, de-identification scaffolds, and clear separation of PHI.</p>
       </div>
     </div>
   </section>
@@ -111,14 +149,15 @@
       <div>
         <h3>Interactive Demo (Mock)</h3>
         <p>Type a few symptoms and press "Suggest". This is a front-end visualization.</p>
-        <div class="card" style="margin-top:20px;">
-          <label style="color:var(--neon-green); font-size:12px; font-weight:bold;">SYMPTOMS</label>
-          <input id="symptomsInput" class="input" placeholder="e.g. cough, fever, headache">
-          <div style="margin-top:15px; display:flex;">
+        <div class="demo-panel card">
+          <label class="input-label">Symptoms (comma-separated)</label>
+          <input id="symptomsInput" class="input" placeholder="cough, sore throat, nasal congestion">
+          <div class="demo-actions">
             <button id="demoSuggest" class="btn btn-primary">Suggest</button>
             <button id="demoClear" class="btn btn-ghost">Clear</button>
           </div>
-          <div id="demoResults" style="margin-top:15px;"></div>
+          <div id="demoLoading" class="line-loader" hidden></div>
+          <div id="demoResults" class="result-list"></div>
         </div>
       </div>
       <div class="card glass">
@@ -135,19 +174,18 @@
   <section id="collab" class="section container reveal">
     <h3>Collaborate</h3>
     <p>Your answers stay private on your device unless you export them.</p>
-
     <form id="collabForm" class="card grid two">
       <div style="grid-column: 1/-1;">
-        <label>Name</label>
+        <label class="input-label">Name</label>
         <input name="name" required class="input" placeholder="Dr. Jane Doe">
       </div>
       <div>
-        <label>Email</label>
+        <label class="input-label">Email</label>
         <input name="email" type="email" required class="input" placeholder="you@example.com">
       </div>
       <div>
-        <label>Role</label>
-        <select name="domain" class="input" required style="background:#1a1a1a;">
+        <label class="input-label">Role</label>
+        <select name="domain" class="input" required>
           <option value="">Select...</option>
           <option>Clinical Partner</option>
           <option>ML Engineer</option>
@@ -156,78 +194,217 @@
         </select>
       </div>
       <div style="grid-column: 1/-1;">
-        <label>How can you help?</label>
+        <label class="input-label">How can you help?</label>
         <textarea name="pitch" class="input" rows="4"></textarea>
       </div>
-      <div style="grid-column: 1/-1;">
+      <div style="grid-column: 1/-1; display:flex; gap:10px;">
         <button class="btn btn-primary" type="submit">Save Interest</button>
-        <span id="collabMsg" style="margin-left:10px; color:var(--neon-green);"></span>
+        <button class="btn btn-ghost" type="button" id="exportCollab">Export JSON</button>
       </div>
+      <p id="collabMsg" style="color:var(--yellow); grid-column:1/-1;"></p>
     </form>
   </section>
 
   <section id="contact" class="section container reveal">
     <h3>Contact</h3>
-    <div class="card glass" style="text-align:center;">
-      <p><strong>Email:</strong> <a href="mailto:jalan.raunak@outlook.com" style="color:var(--neon-green);">jalan.raunak@outlook.com</a></p>
-      <div style="margin-top:20px;">
-        <a href="https://x.com/notso0p" target="_blank" style="margin:0 10px; color:white;">X (Twitter)</a>
-        <a href="https://www.linkedin.com/in/jalan-raunak/" target="_blank" style="margin:0 10px; color:white;">LinkedIn</a>
+    <div class="card glass contact-box">
+      <p><strong>Email:</strong> <a href="mailto:jalan.raunak@outlook.com">jalan.raunak@outlook.com</a></p>
+      <div class="socials">
+        <a href="https://x.com/notso0p" target="_blank">X (Twitter)</a>
+        <a href="https://www.linkedin.com/in/jalan-raunak/" target="_blank">LinkedIn</a>
       </div>
     </div>
   </section>
 
-  <footer style="border-top: 1px solid rgba(255,255,255,0.1); padding: 40px 0; text-align:center; color: rgba(255,255,255,0.5); margin-top: 60px;">
+  <footer class="footer container">
     <p>&copy; <span id="year"></span> EvoDoc. All rights reserved.</p>
   </footer>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // 1. Loader
-      setTimeout(() => document.getElementById('loader').classList.add('hidden'), 500);
-      document.getElementById('year').textContent = new Date().getFullYear();
+      
+      /* --- 1. GLOBAL & LOADER --- */
+      const q = (s, r=document) => r.querySelector(s);
+      const qa = (s, r=document) => [...r.querySelectorAll(s)];
+      
+      const loader = q('#loader');
+      setTimeout(() => loader?.classList.add('hidden'), 500);
 
-      // 2. Scroll Reveal
-      const observer = new IntersectionObserver((entries) => {
+      const y = q('#year'); if (y) y.textContent = new Date().getFullYear();
+
+      /* --- 2. SCROLL REVEAL --- */
+      const io = new IntersectionObserver((entries) => {
         entries.forEach(ent => {
           if (ent.isIntersecting) ent.target.classList.add('visible');
         });
       }, { threshold: 0.1 });
-      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+      qa('.reveal').forEach(el => io.observe(el));
 
-      // 3. Demo Logic
-      const demoBtn = document.getElementById('demoSuggest');
-      const demoIn = document.getElementById('symptomsInput');
-      const demoRes = document.getElementById('demoResults');
-      
-      if(demoBtn){
+      /* --- 3. PARALLAX EFFECT --- */
+      const parallaxEl = q('.parallax');
+      window.addEventListener('scroll', () => {
+        const yVal = window.scrollY * 0.12;
+        if (parallaxEl) parallaxEl.style.transform = `translateY(${yVal}px)`;
+      });
+
+      /* --- 4. RIPPLE EFFECTS --- */
+      const rippleTargets = [...qa('.btn'), ...qa('.card')];
+      rippleTargets.forEach(el => {
+        el.addEventListener('pointerdown', (e) => {
+          const rect = el.getBoundingClientRect();
+          // Create ripple element via CSS ::after, just need to trigger class reflow
+          el.classList.remove('rippling');
+          void el.offsetWidth; // force reflow
+          el.classList.add('rippling');
+        });
+      });
+
+      /* --- 5. DEMO LOGIC --- */
+      const demoInput = q('#symptomsInput');
+      const demoBtn = q('#demoSuggest');
+      const demoClear = q('#demoClear');
+      const demoRes = q('#demoResults');
+      const demoLoad = q('#demoLoading');
+
+      const SAMPLE_MAP = {
+        "cough sore throat": [
+          {dx:"Upper Respiratory Infection", p:0.42, why:["cough","throat irritation"], next:"Fluids, rest; monitor temp"},
+          {dx:"Strep Throat", p:0.21, why:["sore throat"], next:"Rapid antigen if exudate present"}
+        ],
+        "chest pain": [
+          {dx:"Angina", p:0.31, why:["chest pain"], next:"ECG, Troponin"},
+          {dx:"GERD", p:0.16, why:["burning sensation"], next:"PPI trial"}
+        ]
+      };
+
+      function normalize(text) {
+        return text.toLowerCase().replace(/[^a-z\s]/g,'').trim();
+      }
+
+      if (demoBtn) {
         demoBtn.addEventListener('click', () => {
-          if(!demoIn.value) return;
-          demoRes.innerHTML = `<div style="color:var(--neon-green)">Analyzing...</div>`;
+          const text = normalize(demoInput.value || '');
+          if (!text) { demoInput.focus(); return; }
+          
+          demoLoad.hidden = false; 
+          demoRes.innerHTML = '';
+          
           setTimeout(() => {
-            demoRes.innerHTML = `
-              <div style="background:rgba(225,255,0,0.1); padding:10px; border-radius:8px; border:1px solid var(--neon-green);">
-                <strong style="color:var(--neon-green);">Upper Respiratory Infection</strong> (85%)<br>
-                <small style="color:#fff;">Based on cough & fever patterns.</small>
-              </div>`;
+            demoLoad.hidden = true;
+            // Simple match or fallback
+            let items = [];
+            const key = Object.keys(SAMPLE_MAP).find(k => text.includes(k));
+            if (key) items = SAMPLE_MAP[key];
+            else items = [
+              {dx:"Viral Syndrome (Unspecified)", p:0.25, why:["nonspecific symptoms"], next:"Supportive care"},
+              {dx:"Needs Clinical Review", p:0.15, why:["complex pattern"], next:"Detailed history required"}
+            ];
+
+            items.forEach(item => {
+              const card = document.createElement('div'); card.className='result-card';
+              card.innerHTML = `
+                <div>
+                  <div class="result-meta">
+                    <strong>${item.dx}</strong> 
+                    <span class="badge">${(item.p*100).toFixed(0)}%</span>
+                  </div>
+                  <div style="margin-top:4px; font-size:0.85em; color:rgba(255,255,255,0.6)">
+                    ${item.why.join(', ')}
+                  </div>
+                </div>
+                <div class="badge" style="background:rgba(255,255,255,0.1); color:#fff; border:none;">
+                  ${item.next}
+                </div>
+              `;
+              demoRes.appendChild(card);
+            });
           }, 800);
         });
-        document.getElementById('demoClear').addEventListener('click', () => {
-          demoIn.value = ''; demoRes.innerHTML = '';
+
+        demoClear.addEventListener('click', () => {
+          demoInput.value = ''; demoRes.innerHTML=''; demoLoad.hidden=true;
         });
       }
 
-      // 4. Form
-      const form = document.getElementById('collabForm');
-      if(form){
-        form.addEventListener('submit', (e) => {
-          e.preventDefault();
-          const msg = document.getElementById('collabMsg');
-          msg.textContent = "Saved locally!";
-          setTimeout(() => msg.textContent = '', 3000);
-          form.reset();
-        });
+      /* --- 6. FORM LOGIC --- */
+      function saveLocal(key, obj){
+        const arr = JSON.parse(localStorage.getItem(key) || '[]');
+        arr.push({ ...obj, ts: new Date().toISOString() });
+        localStorage.setItem(key, JSON.stringify(arr));
       }
+
+      function exportLocal(key, filename){
+        const blob = new Blob([localStorage.getItem(key) || '[]'], {type:'application/json'});
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = filename;
+        a.click();
+        URL.revokeObjectURL(a.href);
+      }
+
+      const collabForm = q('#collabForm');
+      const collabMsg = q('#collabMsg');
+      const exportBtn = q('#exportCollab');
+
+      if (collabForm) {
+        collabForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const data = Object.fromEntries(new FormData(collabForm).entries());
+          saveLocal('evodoc_collab', data);
+          collabForm.reset();
+          collabMsg.textContent = "Thanks! Info saved locally. You can export it.";
+          setTimeout(()=> collabMsg.textContent='', 5000);
+        });
+        exportBtn?.addEventListener('click', () => exportLocal('evodoc_collab', 'evodoc-collab.json'));
+      }
+
+      /* --- 7. CURSOR TRAIL (Canvas) --- */
+      const cursor = document.getElementById('cursor');
+      const cvs = document.getElementById('cursorTrail');
+      if (cursor && cvs) {
+        const ctx = cvs.getContext('2d');
+        let w, h; const DPR = Math.min(2, window.devicePixelRatio || 1);
+        const particles = [];
+
+        function resize(){
+          w = cvs.width = window.innerWidth * DPR;
+          h = cvs.height = window.innerHeight * DPR;
+          cvs.style.width = window.innerWidth + 'px';
+          cvs.style.height = window.innerHeight + 'px';
+          ctx.scale(DPR, DPR);
+        }
+        resize(); window.addEventListener('resize', resize);
+
+        let mx = window.innerWidth/2, my = window.innerHeight/2;
+        window.addEventListener('pointermove', e => {
+          mx = e.clientX; my = e.clientY;
+          cursor.style.transform = `translate(${mx}px, ${my}px)`;
+          for (let i=0;i<2;i++){
+            particles.push({
+              x: mx, y: my, 
+              vx:(Math.random()-.5)*1, vy:(Math.random()-.5)*1,
+              life: 1, r: Math.random()*2+1
+            });
+          }
+        });
+
+        function step(){
+          ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
+          for (let i=particles.length-1; i>=0; i--){
+            let p = particles[i];
+            p.x += p.vx; p.y += p.vy; p.life -= 0.02;
+            ctx.globalAlpha = Math.max(p.life,0);
+            ctx.beginPath(); 
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); 
+            ctx.fillStyle = '#e1ff00'; // Neon Green particles
+            ctx.fill();
+            if (p.life<=0) particles.splice(i,1);
+          }
+          requestAnimationFrame(step);
+        }
+        step();
+      }
+
     });
   </script>
 </body>
