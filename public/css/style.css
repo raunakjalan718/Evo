@@ -5,7 +5,6 @@
   /* --- Palette --- */
   --neon-green: #e1ff00;       /* The signature bright yellow/green */
   --charcoal: #121416;         /* Deep Dark Background */
-  --slate: #2c3333;            /* Secondary Dark */
   --text-light: #ffffff;
   --text-dark: #000000;        /* Pure black for contrast on yellow */
   
@@ -110,28 +109,26 @@ a { color: inherit; text-decoration: none; transition: opacity 0.2s; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Reduced padding to bring it closer to header as requested */
-  padding-top: 40px; 
-  padding-bottom: 100px;
-  overflow: visible; /* Allow doctor to overlap */
+  /* Reduced top padding as requested to bring text closer to header */
+  padding-top: 60px; 
+  padding-bottom: 120px;
 }
 
 /* The Yellow Rectangle Container */
 .hero-banner {
-  width: 95vw;
+  width: 90vw; /* Wide but not full edge-to-edge */
   max-width: 1400px;
   background-color: var(--neon-green); /* Bright Yellow Box */
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  padding: 4vw 0; /* Vertical breathing room for text */
-  margin-bottom: 60px; /* Space for the doctor's legs/footer */
+  padding: 2vw 0; /* Vertical breathing room for text */
 }
 
 /* The Massive "EVODOC" Text */
 .hero-text {
-  font-size: 22vw; /* Massive responsive font */
+  font-size: 24vw; /* Massive responsive font */
   font-weight: 900;
   line-height: 0.8;
   color: var(--text-dark); /* Solid Black */
@@ -140,6 +137,8 @@ a { color: inherit; text-decoration: none; transition: opacity 0.2s; }
   text-align: center;
   z-index: 1; /* Behind doctor */
   user-select: none;
+  /* Ensure text doesn't overflow the yellow box on small screens */
+  overflow: hidden; 
 }
 
 /* The Doctor Image Layer */
@@ -147,9 +146,9 @@ a { color: inherit; text-decoration: none; transition: opacity 0.2s; }
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -45%); /* Center over the text */
+  transform: translate(-50%, -40%); /* Center over the text */
   z-index: 5; /* In front of text */
-  height: 110%; /* Taller than the box to create overlap */
+  height: 120%; /* Taller than the box to create overlap */
   pointer-events: none;
   display: flex;
   flex-direction: column;
@@ -159,45 +158,30 @@ a { color: inherit; text-decoration: none; transition: opacity 0.2s; }
 .hero-doc {
   height: 100%;
   width: auto;
-  filter: drop-shadow(0 15px 30px rgba(0,0,0,0.4));
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
   object-fit: contain;
 }
 
 /* The Dark Bottom Card ("Personalized AI...") */
 .hero-bottom-card {
-  position: absolute;
-  bottom: -40px; /* Offset to hang off the bottom of the doctor area */
+  /* Positioned relative to the main hero container, not the banner */
+  margin-top: 100px; /* Push it down below the banner/doctor */
   background-color: #1a1a1a;
-  padding: 20px 40px;
+  padding: 15px 40px;
   border-radius: 12px;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
   z-index: 6;
-  min-width: 300px;
+  min-width: 280px;
+  max-width: 90%;
 }
 
 .hero-bottom-card h2 {
   color: #fff;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 700;
   margin: 0;
   line-height: 1.2;
-}
-
-/* Launch Badge */
-.hero-badge {
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--neon-green);
-  color: black;
-  font-weight: 800;
-  padding: 5px 15px;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  text-transform: uppercase;
 }
 
 /* =========================================
@@ -287,9 +271,14 @@ a { color: inherit; text-decoration: none; transition: opacity 0.2s; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .hero-text { font-size: 20vw; }
+  .hero-banner { width: 95vw; }
+}
+
 @media (max-width: 768px) {
-  .hero-text { font-size: 18vw; }
-  .hero-banner { height: auto; min-height: 300px; }
-  .hero-doc-wrapper { height: 90%; transform: translate(-50%, -40%); }
-  .hero-bottom-card { width: 90%; bottom: -60px; }
+  .hero-text { font-size: 22vw; }
+  .hero-banner { height: auto; min-height: 250px; }
+  .hero-doc-wrapper { height: 100%; transform: translate(-50%, -35%); }
+  .hero-bottom-card { margin-top: 80px; width: 90%; }
 }
