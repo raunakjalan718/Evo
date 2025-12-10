@@ -4,24 +4,28 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>EvoDoc - Personalized AI treatment assistant</title>
-  
   <link rel="icon" href="public/assets/favicon.svg">
-  <link rel="stylesheet" href="public/css/style.css">
+  <link rel="preload" href="public/assets/doc.png" as="image">
+  
+  <link rel="stylesheet" href="public/css/theme.css">
+  <link rel="stylesheet" href="public/css/base.css">
+  <link rel="stylesheet" href="public/css/components.css">
+  <link rel="stylesheet" href="public/css/animations.css">
 </head>
 <body data-page="home">
   
   <div id="loader" class="loader">
-    <div>
-      <div class="spinner"></div>
-      <p>Initializing Adaptive Care Engine...</p>
-    </div>
+    <div class="spinner"></div>
+    <p>Initializing Adaptive Care Engine...</p>
   </div>
+
+  <div id="exitOverlay" class="exit-overlay"></div>
 
   <div id="cursor" class="cursor"></div>
   <canvas id="cursorTrail"></canvas>
 
   <header class="nav">
-    <a href="#" class="brand">
+    <a href="#" class="brand link-exit">
       <img src="public/assets/logo.svg" alt="EvoDoc" class="logo">
       <span>EvoDoc</span>
     </a>
@@ -77,6 +81,7 @@
         <p>
           Health data is scattered and time is tight. EvoDoc condenses signals from symptoms,
           structured records, and context to suggest <strong>clinically-plausible</strong> differentials.
+          You stay in control—EvoDoc reduces cognitive load.
         </p>
       </div>
       <div class="card glass">
@@ -95,11 +100,11 @@
     <div class="grid three">
       <div class="card hover-rise">
         <h4>Signal triage</h4>
-        <p>Summarizes symptom clusters and flags red-flags for escalation.</p>
+        <p>Summarizes symptom clusters and flags red-flags for escalation, reducing unnecessary workups.</p>
       </div>
       <div class="card hover-rise">
         <h4>Explainable suggestions</h4>
-        <p>Each suggestion links to contributing features so your reasoning remains first-class.</p>
+        <p>Each suggestion links to contributing features so your clinical reasoning remains first-class.</p>
       </div>
       <div class="card hover-rise">
         <h4>Fits your workflow</h4>
@@ -117,7 +122,7 @@
       </div>
       <div class="card hover-rise">
         <h4>Clarity</h4>
-        <p>Plain-language summaries and next steps you can actually follow.</p>
+        <p>Plain-language summaries and next steps you can actually follow without jargon.</p>
       </div>
       <div class="card hover-rise">
         <h4>Safer choices</h4>
@@ -150,13 +155,14 @@
         <h3>Interactive Demo (Mock)</h3>
         <p>Type a few symptoms and press "Suggest". This is a front-end visualization.</p>
         <div class="demo-panel card">
-          <label style="color:var(--yellow); font-weight:bold; font-size:12px; text-transform:uppercase;">Symptoms (comma-separated)</label>
-          <input id="symptomsInput" class="input" placeholder="cough, sore throat, nasal congestion">
+          <label style="color:var(--yellow); font-weight:bold;">Symptoms (comma-separated)</label>
+          <input id="symptomsInput" class="input" placeholder="cough, sore throat, nasal congestion" style="margin-top:10px;">
           <div class="demo-actions" style="margin-top:20px;">
             <button id="demoSuggest" class="btn btn-primary">Suggest</button>
             <button id="demoClear" class="btn btn-ghost">Clear</button>
           </div>
-          <div id="demoResults" style="margin-top:20px; display:grid; gap:10px;"></div>
+          <div id="demoLoading" class="line-loader" hidden></div>
+          <div id="demoResults" class="result-list"></div>
         </div>
       </div>
       <div class="card glass">
@@ -174,8 +180,8 @@
     <h3>Collaborate</h3>
     <p>Your answers stay private on your device unless you export them.</p>
 
-    <form id="collabForm" class="card grid two">
-      <div style="grid-column: 1/-1;">
+    <form id="collabForm" class="card form-grid">
+      <div class="full">
         <label>Name</label>
         <input name="name" required class="input" placeholder="Dr. Jane Doe">
       </div>
@@ -193,15 +199,15 @@
           <option>Investor</option>
         </select>
       </div>
-      <div style="grid-column: 1/-1;">
+      <div class="full">
         <label>How can you help?</label>
         <textarea name="pitch" class="input" rows="4"></textarea>
       </div>
-      <div style="grid-column: 1/-1; display:flex; gap:10px;">
+      <div class="form-actions full">
         <button class="btn btn-primary" type="submit">Save Interest</button>
         <button class="btn btn-ghost" type="button" id="exportCollab">Export JSON</button>
       </div>
-      <p id="collabMsg" style="color:var(--yellow); grid-column:1/-1;"></p>
+      <p id="collabMsg" class="form-msg" role="status" style="color:var(--yellow);"></p>
     </form>
   </section>
 
@@ -216,147 +222,13 @@
     </div>
   </section>
 
-  <footer class="footer container" style="border-top: 1px solid rgba(255,255,255,0.1); padding: 40px 0; text-align:center; color: rgba(255,255,255,0.5); margin-top: 60px;">
+  <footer class="footer container" style="border-top-color: rgba(255,255,255,0.1);">
     <p>&copy; <span id="year"></span> EvoDoc. All rights reserved.</p>
   </footer>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      
-      /* --- 1. GLOBAL HELPERS --- */
-      const q = (s) => document.querySelector(s);
-      const qa = (s) => document.querySelectorAll(s);
-      q('#year').textContent = new Date().getFullYear();
-
-      /* --- 2. LOADER --- */
-      setTimeout(() => q('#loader').classList.add('hidden'), 500);
-
-      /* --- 3. SCROLL REVEAL & PARALLAX --- */
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(ent => {
-          if (ent.isIntersecting) ent.target.classList.add('visible');
-        });
-      }, { threshold: 0.1 });
-      qa('.reveal').forEach(el => observer.observe(el));
-
-      window.addEventListener('scroll', () => {
-        const doc = q('.hero-doc');
-        if(doc) doc.style.transform = `translateY(${window.scrollY * 0.1}px)`;
-      });
-
-      /* --- 4. CUSTOM CURSOR & PARTICLES --- */
-      const cursor = q('#cursor');
-      const cvs = q('#cursorTrail');
-      if (cursor && cvs) {
-        const ctx = cvs.getContext('2d');
-        let w, h; const DPR = window.devicePixelRatio || 1;
-        const particles = [];
-        
-        function resize(){
-          w = cvs.width = window.innerWidth * DPR;
-          h = cvs.height = window.innerHeight * DPR;
-          cvs.style.width = window.innerWidth + 'px';
-          cvs.style.height = window.innerHeight + 'px';
-          ctx.scale(DPR, DPR);
-        }
-        resize(); window.addEventListener('resize', resize);
-
-        window.addEventListener('mousemove', e => {
-          cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-          // Add particles on move
-          for(let i=0; i<2; i++){
-            particles.push({
-              x: e.clientX, y: e.clientY,
-              vx: (Math.random()-0.5), vy: (Math.random()-0.5),
-              life: 1
-            });
-          }
-        });
-
-        function animate(){
-          ctx.clearRect(0,0,window.innerWidth, window.innerHeight);
-          for(let i=0; i<particles.length; i++){
-            let p = particles[i];
-            p.x += p.vx; p.y += p.vy; p.life -= 0.02;
-            ctx.fillStyle = `rgba(225, 255, 0, ${p.life})`;
-            ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, Math.PI*2); ctx.fill();
-          }
-          // Remove dead particles
-          while(particles.length > 0 && particles[0].life <= 0) particles.shift();
-          requestAnimationFrame(animate);
-        }
-        animate();
-      }
-
-      /* --- 5. DEMO MOCK LOGIC --- */
-      const demoBtn = q('#demoSuggest');
-      const demoInput = q('#symptomsInput');
-      const demoRes = q('#demoResults');
-      
-      const MOCK_DATA = {
-        "cough": { dx: "Upper Resp. Infection", conf: "85%", next: "Fluids & Rest" },
-        "chest": { dx: "Angina (Stable)", conf: "60%", next: "ECG Required" },
-        "fever": { dx: "Viral Syndrome", conf: "75%", next: "Monitor Temp" }
-      };
-
-      if (demoBtn) {
-        demoBtn.addEventListener('click', () => {
-          const val = demoInput.value.toLowerCase();
-          if(!val) return;
-          
-          demoRes.innerHTML = `<div style="color:var(--yellow);">Analyzing...</div>`;
-          
-          setTimeout(() => {
-            let match = null;
-            Object.keys(MOCK_DATA).forEach(k => { if(val.includes(k)) match = MOCK_DATA[k]; });
-            
-            if(match) {
-              demoRes.innerHTML = `
-                <div class="card" style="padding:15px; border-color:var(--yellow);">
-                  <div style="display:flex; justify-content:space-between;">
-                    <strong>${match.dx}</strong>
-                    <span class="badge">${match.conf}</span>
-                  </div>
-                  <div style="margin-top:10px; font-size:14px; opacity:0.8;">Suggested Action: ${match.next}</div>
-                </div>
-              `;
-            } else {
-              demoRes.innerHTML = `<div style="color:#fff; opacity:0.7;">No clear pattern found. Needs clinical review.</div>`;
-            }
-          }, 800);
-        });
-        
-        q('#demoClear').addEventListener('click', () => {
-          demoInput.value = ''; demoRes.innerHTML = '';
-        });
-      }
-
-      /* --- 6. FORMS (LOCALSTORAGE) --- */
-      const form = q('#collabForm');
-      if (form) {
-        form.addEventListener('submit', (e) => {
-          e.preventDefault();
-          const data = Object.fromEntries(new FormData(form));
-          const existing = JSON.parse(localStorage.getItem('evodoc_data') || '[]');
-          existing.push(data);
-          localStorage.setItem('evodoc_data', JSON.stringify(existing));
-          
-          const msg = q('#collabMsg');
-          msg.textContent = "Saved locally! Thank you.";
-          form.reset();
-          setTimeout(() => msg.textContent = '', 3000);
-        });
-
-        q('#exportCollab').addEventListener('click', () => {
-          const data = localStorage.getItem('evodoc_data') || '[]';
-          const blob = new Blob([data], {type: 'application/json'});
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url; a.download = 'evodoc-data.json';
-          a.click();
-        });
-      }
-    });
-  </script>
+  <script src="public/js/cursor.js"></script>
+  <script src="public/js/main.js"></script>
+  <script src="public/js/demo.js"></script>
+  <script src="public/js/forms.js"></script>
 </body>
 </html>
