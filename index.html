@@ -4,66 +4,67 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>EvoDoc - Your Intelligent Health Co-Pilot</title>
-  
-  <link rel="icon" href="https://media.githubusercontent.com/media/raunakjalan718/Evo/refs/heads/main/public/assets/favicon.svg">
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="public/assets/favicon.svg">
+  <link rel="stylesheet" href="public/css/style.css">
 </head>
 <body data-page="home">
   
   <div id="loader" class="loader">
     <div style="text-align:center;">
       <div class="spinner"></div>
-      <p>Initializing...</p>
+      <p>System Initializing...</p>
     </div>
   </div>
 
   <div id="cursor" class="cursor"></div>
+  <canvas id="cursorTrail"></canvas>
 
   <header class="nav">
     <a href="#" class="brand">
-      <img src="https://media.githubusercontent.com/media/raunakjalan718/Evo/refs/heads/main/public/assets/logo.svg" alt="EvoDoc" class="logo">
+      <img src="public/assets/logo.svg" alt="EvoDoc" class="logo">
       <span>EVODOC</span>
     </a>
     <nav>
-      <a href="#overview">Overview</a>
-      <a href="#demo">Demo</a>
-      <a href="#collab">Collaborate</a>
-      <a href="#contact">Contact</a>
+      <a href="#overview" class="hover-trigger">Overview</a>
+      <a href="#demo" class="hover-trigger">Demo</a>
+      <a href="#collab" class="hover-trigger">Collaborate</a>
+      <a href="#contact" class="hover-trigger">Contact</a>
     </nav>
   </header>
 
   <section class="hero">
-    <div class="hero-card">
-      
-      <div class="hero-header">
-        <span class="hero-launch">LAUNCHING SOON</span>
-        <div class="hero-meta">
-          <span class="hero-meta-label">Adaptive Care Engine</span>
-          <span class="hero-meta-date">Beta Access &bull; Q1 2026</span>
-        </div>
-      </div>
-
-      <div class="hero-body">
-        <div class="hero-wordmark">
-          <span class="hero-word">EVO</span>
-          <span class="hero-word">DOC</span>
-        </div>
-        <div class="hero-figure parallax">
-          <img class="hero-doc" src="https://media.githubusercontent.com/media/raunakjalan718/Evo/refs/heads/main/public/assets/doc.png" alt="AI Doctor Assistant" />
-        </div>
-        <div class="hero-info">
-          <h1 class="hero-heading">Personalized AI treatment assistant</h1>
-          <p class="hero-lede">
-            EvoDoc blends longitudinal health data, clinician intuition, and adaptive machine learning
-            to unlock proactive, context-aware care.
-          </p>
-          <div class="hero-cta">
-            <a class="btn btn-primary" href="#demo">Preview the Demo</a>
-            <a class="btn btn-ghost" href="#persona-section">How it works</a>
-          </div>
-        </div>
+    
+    <div class="hero-header">
+      <span class="hero-launch">LAUNCHING SOON</span>
+      <div class="hero-meta">
+        Know Test Tell • V1 2025
       </div>
     </div>
+
+    <div class="hero-box">
+      <div class="hero-wordmark">
+        <span class="hero-word">EVO</span>
+        <span class="hero-word">DOC</span>
+      </div>
+      
+      <div class="hero-doc-wrapper reveal">
+        <img class="hero-doc" src="public/assets/doc.png" alt="AI Doctor Assistant" />
+      </div>
+    </div>
+
+    <div class="hero-card-dark reveal">
+      <h1>Your Intelligent<br>Clinical Co-Pilot</h1>
+      <p>
+        EvoDoc acts like a tireless "Junior Doctor." It analyzes symptoms, patient history, 
+        and medical logic to help you make faster, safer decisions. 
+        <strong>Designed to support humans, not replace them.</strong>
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary hover-trigger" href="#demo">Try the Demo</a>
+        <a class="btn btn-ghost hover-trigger" href="#persona-section">How it Works</a>
+      </div>
+    </div>
+
     <div class="scroll-cue">Scroll</div>
   </section>
 
@@ -73,9 +74,9 @@
       <p style="color:#aaa;">Select your perspective to see how EvoDoc helps you.</p>
       
       <div class="persona-tabs">
-        <button class="tab-btn active" onclick="switchPersona('doctor')">🩺 For Doctors</button>
-        <button class="tab-btn" onclick="switchPersona('patient')">❤️ For Patients</button>
-        <button class="tab-btn" onclick="switchPersona('techie')">⚡ For Techies</button>
+        <button class="tab-btn active hover-trigger" onclick="switchPersona('doctor')">🩺 For Doctors</button>
+        <button class="tab-btn hover-trigger" onclick="switchPersona('patient')">❤️ For Patients</button>
+        <button class="tab-btn hover-trigger" onclick="switchPersona('techie')">⚡ For Techies</button>
       </div>
     </div>
 
@@ -153,11 +154,11 @@
       
       <div class="card">
         <label class="input-label" style="display:block; text-align:left; color:var(--neon-green); font-size:0.8rem; margin-bottom:5px;">ENTER SYMPTOMS</label>
-        <input id="symptomsInput" class="input" placeholder="e.g. Headache, sensitivity to light, nausea">
+        <input id="symptomsInput" class="input hover-trigger" placeholder="e.g. Headache, sensitivity to light, nausea">
         
         <div class="demo-actions" style="margin-top:20px; display:flex; gap:10px;">
-          <button id="demoSuggest" class="btn btn-primary" style="flex:1;">Run Analysis</button>
-          <button id="demoClear" class="btn btn-ghost" style="flex:1;">Reset</button>
+          <button id="demoSuggest" class="btn btn-primary hover-trigger" style="flex:1;">Run Analysis</button>
+          <button id="demoClear" class="btn btn-ghost hover-trigger" style="flex:1;">Reset</button>
         </div>
         
         <div id="demoResults" style="margin-top:20px; text-align:left;"></div>
@@ -172,11 +173,11 @@
       
       <form id="collabForm">
         <div class="grid two">
-          <input name="name" class="input" placeholder="Name" required>
-          <input name="email" class="input" placeholder="Email" required>
+          <input name="name" class="input hover-trigger" placeholder="Name" required>
+          <input name="email" class="input hover-trigger" placeholder="Email" required>
         </div>
-        <textarea name="message" class="input" rows="3" placeholder="How can we help you?"></textarea>
-        <button type="submit" class="btn btn-primary" style="width:100%; margin-top:10px;">Send Message</button>
+        <textarea name="message" class="input hover-trigger" rows="3" placeholder="How can we help you?"></textarea>
+        <button type="submit" class="btn btn-primary hover-trigger" style="width:100%; margin-top:10px;">Send Message</button>
         <p id="collabMsg" style="text-align:center; margin-top:10px; color:var(--neon-green);"></p>
       </form>
     </div>
@@ -192,7 +193,7 @@
       const q = (s) => document.querySelector(s);
       const qa = (s) => document.querySelectorAll(s);
       
-      // 1. Loader & Date
+      // 1. Loader
       setTimeout(() => q('#loader').classList.add('hidden'), 500);
       q('#year').textContent = new Date().getFullYear();
 
@@ -204,13 +205,83 @@
       }, { threshold: 0.1 });
       qa('.reveal').forEach(el => io.observe(el));
 
-      // 3. Cursor
+      // 3. CURSOR & CANVAS TRAIL (Optimized)
       const cursor = q('#cursor');
-      window.addEventListener('mousemove', e => {
-        cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+      const cvs = q('#cursorTrail');
+      const triggers = qa('.hover-trigger'); // Elements that expand cursor
+
+      if(cursor && cvs) {
+        const ctx = cvs.getContext('2d');
+        let width, height;
+        const particles = [];
+        
+        const resize = () => {
+          width = window.innerWidth;
+          height = window.innerHeight;
+          cvs.width = width;
+          cvs.height = height;
+        };
+        window.addEventListener('resize', resize);
+        resize();
+
+        // Mouse Move logic
+        window.addEventListener('mousemove', e => {
+          const x = e.clientX;
+          const y = e.clientY;
+          cursor.style.transform = `translate(${x}px, ${y}px)`;
+          
+          // Add Particle
+          particles.push({
+            x: x, y: y,
+            vx: (Math.random() - 0.5) * 1.5,
+            vy: (Math.random() - 0.5) * 1.5,
+            life: 1,
+            size: Math.random() * 2 + 1
+          });
+        });
+
+        // Hover Animations for Cursor
+        triggers.forEach(el => {
+          el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+          el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+        });
+
+        // Animation Loop (60FPS)
+        const animate = () => {
+          ctx.clearRect(0, 0, width, height);
+          
+          for(let i = 0; i < particles.length; i++) {
+            let p = particles[i];
+            p.x += p.vx;
+            p.y += p.vy;
+            p.life -= 0.02; // Fade out speed
+            
+            if(p.life > 0) {
+              ctx.beginPath();
+              ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+              ctx.fillStyle = `rgba(225, 255, 0, ${p.life})`; // Neon Yellow
+              ctx.fill();
+            } else {
+              particles.splice(i, 1);
+              i--;
+            }
+          }
+          requestAnimationFrame(animate);
+        };
+        animate();
+      }
+
+      // 4. Parallax Effect (Interactive)
+      const docImg = q('.hero-doc');
+      window.addEventListener('mousemove', (e) => {
+        if(window.innerWidth > 900) {
+          const x = (e.clientX / window.innerWidth - 0.5) * 15;
+          const y = (e.clientY / window.innerHeight - 0.5) * 15;
+          docImg.style.transform = `translate(${x}px, ${y}px)`;
+        }
       });
 
-      // 4. Persona Switcher Logic
+      // 5. Persona Switcher
       window.switchPersona = function(role) {
         qa('.tab-btn').forEach(btn => btn.classList.remove('active'));
         event.currentTarget.classList.add('active');
@@ -225,7 +296,7 @@
         }
       };
 
-      // 5. Demo Logic
+      // 6. Demo Logic
       const demoBtn = q('#demoSuggest');
       const demoIn = q('#symptomsInput');
       const demoRes = q('#demoResults');
@@ -265,7 +336,7 @@
         });
       }
 
-      // 6. Form Logic
+      // 7. Form Logic
       const form = q('#collabForm');
       if(form) {
         form.addEventListener('submit', (e) => {
