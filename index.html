@@ -4,15 +4,16 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>EvoDoc - Your Intelligent Health Co-Pilot</title>
-  <link rel="icon" href="public/assets/favicon.svg">
-  <link rel="stylesheet" href="public/css/style.css">
+  
+  <link rel="icon" href="https://media.githubusercontent.com/media/raunakjalan718/Evo/refs/heads/main/public/assets/favicon.svg">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body data-page="home">
   
   <div id="loader" class="loader">
     <div style="text-align:center;">
       <div class="spinner"></div>
-      <p>System Initializing...</p>
+      <p>Initializing...</p>
     </div>
   </div>
 
@@ -20,8 +21,8 @@
   <canvas id="cursorTrail"></canvas>
 
   <header class="nav">
-    <a href="#" class="brand">
-      <img src="public/assets/logo.svg" alt="EvoDoc" class="logo">
+    <a href="#" class="brand hover-trigger">
+      <img src="https://media.githubusercontent.com/media/raunakjalan718/Evo/refs/heads/main/public/assets/logo.svg" alt="EvoDoc" class="logo">
       <span>EVODOC</span>
     </a>
     <nav>
@@ -48,15 +49,15 @@
       </div>
       
       <div class="hero-figure parallax">
-        <img class="hero-doc" src="public/assets/doc.png" alt="AI Doctor Assistant" />
+        <img class="hero-doc" src="https://media.githubusercontent.com/media/raunakjalan718/Evo/refs/heads/main/public/assets/doc.png" alt="AI Doctor Assistant" />
       </div>
       
       <div class="hero-card-dark reveal">
         <h1>Your Intelligent<br>Clinical Co-Pilot</h1>
         <p>
-          EvoDoc acts like a tireless "Junior Doctor." It analyzes symptoms, patient history, 
-          and medical logic to help you make faster, safer decisions. 
-          <strong>Designed to support humans, not replace them.</strong>
+          Like a tireless "Junior Doctor," EvoDoc analyzes symptoms, history, and medical logic 
+          to help you make faster, safer decisions. 
+          <strong>Designed to support doctors, not replace them.</strong>
         </p>
         <div class="hero-actions">
           <a class="btn btn-primary hover-trigger" href="#demo">Try the Demo</a>
@@ -205,7 +206,7 @@
       }, { threshold: 0.1 });
       qa('.reveal').forEach(el => io.observe(el));
 
-      // 3. CURSOR & CANVAS TRAIL (Optimized)
+      // 3. CURSOR & CANVAS TRAIL
       const cursor = q('#cursor');
       const cvs = q('#cursorTrail');
       const triggers = qa('.hover-trigger'); // Elements that expand cursor
@@ -224,7 +225,7 @@
         window.addEventListener('resize', resize);
         resize();
 
-        // Mouse Move logic
+        // Mouse Move
         window.addEventListener('mousemove', e => {
           const x = e.clientX;
           const y = e.clientY;
@@ -240,26 +241,24 @@
           });
         });
 
-        // Hover Animations for Cursor
+        // Interactive Hover
         triggers.forEach(el => {
           el.addEventListener('mouseenter', () => cursor.classList.add('active'));
           el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
         });
 
-        // Animation Loop (60FPS)
+        // Animation Loop
         const animate = () => {
           ctx.clearRect(0, 0, width, height);
-          
           for(let i = 0; i < particles.length; i++) {
             let p = particles[i];
-            p.x += p.vx;
-            p.y += p.vy;
-            p.life -= 0.02; // Fade out speed
+            p.x += p.vx; p.y += p.vy;
+            p.life -= 0.02; 
             
             if(p.life > 0) {
               ctx.beginPath();
               ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-              ctx.fillStyle = `rgba(225, 255, 0, ${p.life})`; // Neon Yellow
+              ctx.fillStyle = `rgba(225, 255, 0, ${p.life})`;
               ctx.fill();
             } else {
               particles.splice(i, 1);
@@ -271,7 +270,7 @@
         animate();
       }
 
-      // 4. Parallax Effect (Interactive)
+      // 4. Parallax Effect
       const docImg = q('.hero-doc');
       window.addEventListener('mousemove', (e) => {
         if(window.innerWidth > 900) {

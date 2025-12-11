@@ -2,11 +2,12 @@
    1. THEME & VARIABLES
    ========================================= */
 :root {
-  --neon-green: #e1ff00;       /* Signature Yellow */
-  --charcoal: #121416;         /* Deep Dark Background */
+  --neon-green: #e1ff00;
+  --dark-olive: #4a503d;
+  --deep-black: #1b1e16;
   --text-light: #ffffff;
   
-  --bg: var(--charcoal);
+  --bg: var(--deep-black);
   --fg: var(--text-light);
   
   /* Glassmorphism */
@@ -27,7 +28,7 @@
 
 html, body {
   margin: 0; padding: 0;
-  background: radial-gradient(circle at 50% 30%, #2b3025 0%, var(--charcoal) 80%);
+  background: radial-gradient(circle at 50% 30%, var(--dark-olive) 0%, var(--deep-black) 80%);
   background-attachment: fixed;
   color: var(--fg);
   font-family: InterVar, system-ui, -apple-system, sans-serif;
@@ -36,27 +37,27 @@ html, body {
   min-height: 100vh;
   overflow-x: hidden;
   -webkit-text-size-adjust: 100%;
-  cursor: none; /* Hide default cursor for custom one */
+  cursor: none; /* Hide default cursor */
 }
 
-/* Texture Overlay */
+/* Noise Texture */
 body::before {
   content: ""; position: fixed; inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
   pointer-events: none; z-index: -1; opacity: 0.4;
 }
 
-::selection { background: var(--neon-green); color: var(--bg); }
+::selection { background: var(--neon-green); color: var(--deep-black); }
 * { box-sizing: border-box; }
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; transition: opacity 0.2s; cursor: none; }
 
 /* =========================================
-   2. UTILITIES & LAYOUT
+   2. LAYOUT UTILITIES
    ========================================= */
 .container { width: min(1200px, 92vw); margin: 0 auto; }
 .section { padding: 100px 0; }
-.section h3 { color: var(--neon-green); font-size: 2rem; margin-bottom: 24px; }
+.section h3 { color: var(--neon-green); font-size: clamp(24px, 4vw, 32px); margin-bottom: 24px; }
 .section p { color: rgba(255, 255, 255, 0.7); }
 
 .grid { display: grid; gap: 24px; }
@@ -86,10 +87,14 @@ a { color: inherit; text-decoration: none; transition: opacity 0.2s; cursor: non
 .brand:hover .logo { transform: rotate(90deg); }
 
 .nav nav { display: flex; gap: 25px; margin-left: 20px; }
-.nav nav a { color: #000; font-weight: 700; font-size: 13px; text-transform: uppercase; position: relative; }
+.nav nav a { 
+  color: #000; font-weight: 700; font-size: 13px; 
+  text-transform: uppercase; position: relative; 
+}
+/* Nav Link Animation */
 .nav nav a::after {
-  content:''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0;
-  background-color: #000; transition: width 0.3s;
+  content: ''; position: absolute; width: 0; height: 2px;
+  bottom: -4px; left: 0; background: #000; transition: width 0.3s;
 }
 .nav nav a:hover::after { width: 100%; }
 
@@ -99,12 +104,12 @@ a { color: inherit; text-decoration: none; transition: opacity 0.2s; cursor: non
 }
 
 /* =========================================
-   4. HERO SECTION (Base Design: Centered)
+   4. HERO SECTION (Adjusted Size & Spacing)
    ========================================= */
 .hero {
   position: relative; width: 100%;
   display: flex; flex-direction: column; align-items: center;
-  /* REDUCED PADDING to close the gap */
+  /* Reduced top padding (was 60px) to bring elements closer to nav */
   padding-top: 30px; 
   padding-bottom: 120px;
   overflow: hidden;
@@ -114,7 +119,7 @@ a { color: inherit; text-decoration: none; transition: opacity 0.2s; cursor: non
 .hero-header {
   display: flex; justify-content: space-between; align-items: center;
   width: 90%; max-width: 1400px;
-  /* REDUCED MARGIN to pull content up */
+  /* Reduced bottom margin to pull text closer */
   margin-bottom: 10px; 
   position: relative; z-index: 5;
 }
@@ -134,27 +139,31 @@ a { color: inherit; text-decoration: none; transition: opacity 0.2s; cursor: non
   position: relative;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   width: 100%; flex-grow: 1;
-  margin-top: 20px;
+  /* Spacing between badges and giant text */
+  margin-top: 10px; 
 }
 
-/* 3. Giant Outline Text */
+/* 3. Giant Background Text (Resized) */
 .hero-wordmark {
   position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);
   display: flex; gap: 20px; z-index: 1;
   pointer-events: none;
 }
 .hero-word {
-  font-size: 26vw; font-weight: 900; line-height: 0.8;
-  color: transparent; -webkit-text-stroke: 3px var(--neon-green);
-  opacity: 0.5;
+  /* Reduced from 26vw to 18vw to fit better */
+  font-size: 18vw; 
+  font-weight: 900; line-height: 0.8;
+  color: transparent; -webkit-text-stroke: 2px var(--neon-green);
+  opacity: 0.6;
+  transition: transform 0.1s ease-out;
 }
 
 /* 4. Doctor Image */
 .hero-figure {
   position: relative; z-index: 5;
-  width: min(400px, 80vw);
-  margin-top: -60px; /* Pull up to overlap text */
-  transition: transform 0.1s ease-out; /* For parallax */
+  width: min(380px, 75vw); /* Slightly smaller max width */
+  margin-top: -40px; 
+  transition: transform 0.1s ease-out;
 }
 .hero-doc {
   width: 100%; filter: drop-shadow(0 30px 60px rgba(0,0,0,0.8));
@@ -162,7 +171,8 @@ a { color: inherit; text-decoration: none; transition: opacity 0.2s; cursor: non
 
 /* 5. Floating Dark Card */
 .hero-card-dark {
-  margin-top: -60px; /* Overlap doctor's feet */
+  /* Spacing: Overlaps doctor's feet slightly */
+  margin-top: -60px; 
   background-color: var(--card-dark);
   padding: 40px 60px;
   border-radius: 20px;
@@ -173,7 +183,10 @@ a { color: inherit; text-decoration: none; transition: opacity 0.2s; cursor: non
   position: relative; z-index: 10;
   transition: transform 0.3s, box-shadow 0.3s;
 }
-.hero-card-dark:hover { transform: translateY(-5px); box-shadow: 0 30px 80px rgba(0,0,0,1); }
+.hero-card-dark:hover { 
+  transform: translateY(-5px); 
+  box-shadow: 0 30px 80px rgba(0,0,0,1); 
+}
 
 .hero-card-dark h1 {
   color: #fff; font-size: 2rem; font-weight: 700; margin: 0 0 15px 0; line-height: 1.2;
@@ -183,15 +196,23 @@ a { color: inherit; text-decoration: none; transition: opacity 0.2s; cursor: non
 }
 .hero-actions { display: flex; justify-content: center; gap: 15px; }
 
-/* Mobile Optimizations */
-@media (max-width: 900px) {
-  .hero-word { font-size: 35vw; -webkit-text-stroke-width: 2px; }
+/* Scroll Cue */
+.scroll-cue {
+  color: var(--neon-green); position: absolute; bottom: 20px; left: 50%;
+  transform: translateX(-50%); text-transform: uppercase; font-size: 0.8rem; opacity: 0.8;
+  animation: fadeUp 2s infinite;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .hero-word { font-size: 24vw; /* Larger relatively on mobile */ }
   .hero-wordmark { flex-direction: column; gap: 0; align-items: center; top: 35%; }
-  .hero-header { flex-direction: column; align-items: center; gap: 10px; margin-bottom: 40px; }
+  .hero-header { flex-direction: column; align-items: center; gap: 10px; margin-bottom: 30px; }
   .hero-doc { width: 80%; max-width: 300px; }
   .hero-card-dark { padding: 30px 20px; margin-top: -20px; }
   .hero-actions { flex-direction: column; width: 100%; }
   .hero-actions .btn { width: 100%; }
+  .hero-meta { text-align: center; }
 }
 
 /* =========================================
@@ -215,7 +236,6 @@ a { color: inherit; text-decoration: none; transition: opacity 0.2s; cursor: non
 }
 
 .persona-content { animation: fadeUp 0.5s ease; }
-@keyframes fadeUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
 /* =========================================
    6. COMPONENTS (Cards, Buttons)
@@ -281,13 +301,12 @@ a { color: inherit; text-decoration: none; transition: opacity 0.2s; cursor: non
   pointer-events: none; z-index: 5000; mix-blend-mode: exclusion;
   transform: translate(-50%,-50%); transition: width 0.2s, height 0.2s;
 }
-.cursor.active { width: 24px; height: 24px; background: #fff; mix-blend-mode: difference; }
+.cursor.active { width: 30px; height: 30px; background: #fff; mix-blend-mode: difference; }
 #cursorTrail { position: fixed; inset: 0; pointer-events: none; z-index: 4999; }
 
-.scroll-cue {
-  color: var(--neon-green); position: absolute; bottom: 20px; left: 50%;
-  transform: translateX(-50%); text-transform: uppercase; font-size: 0.8rem; opacity: 0.8;
-  animation: fadeUp 2s infinite;
-}
+/* General Animations */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .reveal.visible { opacity: 1; transform: translateY(0); }
+.hover-rise { transition: transform 0.2s; }
+.hover-rise:hover { transform: translateY(-5px); }
