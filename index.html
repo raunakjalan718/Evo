@@ -41,30 +41,30 @@
       </div>
     </div>
 
-    <div class="hero-box">
+    <div class="hero-body">
       <div class="hero-wordmark">
         <span class="hero-word">EVO</span>
         <span class="hero-word">DOC</span>
       </div>
       
-      <div class="hero-doc-wrapper reveal">
+      <div class="hero-figure parallax">
         <img class="hero-doc" src="public/assets/doc.png" alt="AI Doctor Assistant" />
       </div>
-    </div>
-
-    <div class="hero-card-dark reveal">
-      <h1>Your Intelligent<br>Clinical Co-Pilot</h1>
-      <p>
-        EvoDoc acts like a tireless "Junior Doctor." It analyzes symptoms, patient history, 
-        and medical logic to help you make faster, safer decisions. 
-        <strong>Designed to support humans, not replace them.</strong>
-      </p>
-      <div class="hero-actions">
-        <a class="btn btn-primary hover-trigger" href="#demo">Try the Demo</a>
-        <a class="btn btn-ghost hover-trigger" href="#persona-section">How it Works</a>
+      
+      <div class="hero-card-dark reveal">
+        <h1>Your Intelligent<br>Clinical Co-Pilot</h1>
+        <p>
+          EvoDoc acts like a tireless "Junior Doctor." It analyzes symptoms, patient history, 
+          and medical logic to help you make faster, safer decisions. 
+          <strong>Designed to support humans, not replace them.</strong>
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary hover-trigger" href="#demo">Try the Demo</a>
+          <a class="btn btn-ghost hover-trigger" href="#persona-section">How it Works</a>
+        </div>
       </div>
     </div>
-
+    
     <div class="scroll-cue">Scroll</div>
   </section>
 
@@ -193,7 +193,7 @@
       const q = (s) => document.querySelector(s);
       const qa = (s) => document.querySelectorAll(s);
       
-      // 1. Loader
+      // 1. Loader & Date
       setTimeout(() => q('#loader').classList.add('hidden'), 500);
       q('#year').textContent = new Date().getFullYear();
 

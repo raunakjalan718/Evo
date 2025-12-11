@@ -99,22 +99,23 @@ a { color: inherit; text-decoration: none; transition: opacity 0.2s; cursor: non
 }
 
 /* =========================================
-   4. HERO SECTION (Yellow Box Design)
+   4. HERO SECTION (Base Design: Centered)
    ========================================= */
 .hero {
   position: relative; width: 100%;
   display: flex; flex-direction: column; align-items: center;
-  /* Reduced top padding here */
-  padding-top: 40px; 
+  /* REDUCED PADDING to close the gap */
+  padding-top: 30px; 
   padding-bottom: 120px;
   overflow: hidden;
 }
 
-/* Header Labels */
+/* 1. Header Labels */
 .hero-header {
-  display: flex; justify-content: space-between; width: 90%; max-width: 1400px;
-  /* Reduced bottom margin here */
-  margin-bottom: 20px; 
+  display: flex; justify-content: space-between; align-items: center;
+  width: 90%; max-width: 1400px;
+  /* REDUCED MARGIN to pull content up */
+  margin-bottom: 10px; 
   position: relative; z-index: 5;
 }
 .hero-launch {
@@ -123,55 +124,56 @@ a { color: inherit; text-decoration: none; transition: opacity 0.2s; cursor: non
   letter-spacing: 0.1em; box-shadow: 0 0 15px rgba(225, 255, 0, 0.4);
   animation: pulseBadge 2s infinite;
 }
-.hero-meta { text-align: right; font-size: 0.8rem; color: rgba(255,255,255,0.7); }
-
-/* The Yellow Banner */
-.hero-box {
-  position: relative; width: 95%; max-width: 1600px;
-  background-color: var(--neon-green);
-  height: 400px;
-  display: flex; align-items: center; justify-content: center;
-  margin-bottom: 100px;
-  transition: transform 0.3s ease;
+.hero-meta { 
+  text-align: right; font-size: 0.85rem; color: rgba(255,255,255,0.8); 
+  letter-spacing: 0.5px; font-weight: 500;
 }
-/* Subtle interaction */
-.hero-box:hover { transform: scale(1.005); }
 
-/* Massive Text */
+/* 2. Main Wrapper */
+.hero-body {
+  position: relative;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  width: 100%; flex-grow: 1;
+  margin-top: 20px;
+}
+
+/* 3. Giant Outline Text */
 .hero-wordmark {
-  display: flex; gap: 20px; z-index: 1; pointer-events: none;
+  position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);
+  display: flex; gap: 20px; z-index: 1;
+  pointer-events: none;
 }
 .hero-word {
-  font-size: 24vw; font-weight: 900; color: #000; margin: 0; 
-  line-height: 0.8; letter-spacing: -0.04em; user-select: none;
+  font-size: 26vw; font-weight: 900; line-height: 0.8;
+  color: transparent; -webkit-text-stroke: 3px var(--neon-green);
+  opacity: 0.5;
 }
 
-/* Doctor Overlap */
-.hero-doc-wrapper {
-  position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%);
-  height: 140%; z-index: 10; pointer-events: none;
-  display: flex; align-items: flex-end;
+/* 4. Doctor Image */
+.hero-figure {
+  position: relative; z-index: 5;
+  width: min(400px, 80vw);
+  margin-top: -60px; /* Pull up to overlap text */
+  transition: transform 0.1s ease-out; /* For parallax */
 }
 .hero-doc {
-  height: 100%; width: auto;
-  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
-  transition: transform 0.1s ease-out; /* Smooth parallax in JS */
+  width: 100%; filter: drop-shadow(0 30px 60px rgba(0,0,0,0.8));
 }
 
-/* Floating Dark Card */
+/* 5. Floating Dark Card */
 .hero-card-dark {
-  margin-top: -80px; 
+  margin-top: -60px; /* Overlap doctor's feet */
   background-color: var(--card-dark);
   padding: 40px 60px;
   border-radius: 20px;
   text-align: center;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.9);
   border: 1px solid rgba(255,255,255,0.1);
-  z-index: 20;
   max-width: 600px; width: 90%;
+  position: relative; z-index: 10;
   transition: transform 0.3s, box-shadow 0.3s;
 }
-.hero-card-dark:hover { transform: translateY(-5px); box-shadow: 0 30px 70px rgba(0,0,0,0.9); }
+.hero-card-dark:hover { transform: translateY(-5px); box-shadow: 0 30px 80px rgba(0,0,0,1); }
 
 .hero-card-dark h1 {
   color: #fff; font-size: 2rem; font-weight: 700; margin: 0 0 15px 0; line-height: 1.2;
@@ -183,12 +185,12 @@ a { color: inherit; text-decoration: none; transition: opacity 0.2s; cursor: non
 
 /* Mobile Optimizations */
 @media (max-width: 900px) {
-  .hero-box { height: auto; padding: 60px 0; }
-  .hero-wordmark { flex-direction: column; gap: 0; align-items: center; }
-  .hero-word { font-size: 35vw; line-height: 0.75; }
-  .hero-doc-wrapper { height: 110%; bottom: -30px; }
-  .hero-card-dark { margin-top: 40px; padding: 30px 20px; }
-  .hero-actions { flex-direction: column; }
+  .hero-word { font-size: 35vw; -webkit-text-stroke-width: 2px; }
+  .hero-wordmark { flex-direction: column; gap: 0; align-items: center; top: 35%; }
+  .hero-header { flex-direction: column; align-items: center; gap: 10px; margin-bottom: 40px; }
+  .hero-doc { width: 80%; max-width: 300px; }
+  .hero-card-dark { padding: 30px 20px; margin-top: -20px; }
+  .hero-actions { flex-direction: column; width: 100%; }
   .hero-actions .btn { width: 100%; }
 }
 
