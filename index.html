@@ -33,39 +33,39 @@
   </header>
 
   <section class="hero">
-    
-    <div class="hero-header-container">
-      <span class="hero-launch hover-trigger">LAUNCHING SOON</span>
-      <div class="hero-meta">
-        Know Test Tell • V1 2025
-      </div>
-    </div>
-
-    <div class="hero-grid">
+    <div class="hero-card">
       
-      <div class="hero-left reveal">
-        <div class="hero-card-dark">
-          <h1>Your Intelligent<br>Clinical Co-Pilot</h1>
+      <div class="hero-header">
+        <span class="hero-launch">LAUNCHING SOON</span>
+        <div class="hero-meta">
+          Know Test Tell • V1 2025
+        </div>
+      </div>
+
+      <div class="hero-body">
+        <div class="hero-wordmark">
+          <span class="hero-word">EVO</span>
+          <span class="hero-word">DOC</span>
+        </div>
+        
+        <div class="hero-figure parallax">
+          <img class="hero-doc" src="public/assets/doc.png" alt="AI Doctor Assistant" />
+        </div>
+        
+        <div class="hero-info reveal">
+          <h1 class="hero-heading">Your Intelligent<br>Clinical Co-Pilot</h1>
           <p>
             EvoDoc acts like a tireless "Junior Doctor." It analyzes symptoms, patient history, 
             and medical logic to help you make faster, safer decisions. 
             <strong>Designed to support doctors, not replace them.</strong>
           </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary hover-trigger" href="#demo">Preview Demo</a>
+          <div class="hero-cta">
+            <a class="btn btn-primary hover-trigger" href="#demo">Try the Demo</a>
             <a class="btn btn-ghost hover-trigger" href="#persona-section">How it Works</a>
           </div>
         </div>
       </div>
-
-      <div class="hero-right reveal">
-        <div class="hero-art-wrapper">
-          <img class="hero-art hover-trigger" src="public/assets/hero.png" alt="EvoDoc Artistic Vision" />
-        </div>
-      </div>
-
     </div>
-
     <div class="scroll-cue">Scroll</div>
   </section>
 
@@ -249,17 +249,15 @@
         animate();
       }
 
-      // 4. Parallax Effect
+      // 4. Parallax Effect (Interactive)
       const docImg = q('.hero-doc');
-      if(docImg) {
-        window.addEventListener('mousemove', (e) => {
-          if(window.innerWidth > 900) {
-            const x = (e.clientX / window.innerWidth - 0.5) * 15;
-            const y = (e.clientY / window.innerHeight - 0.5) * 15;
-            docImg.style.transform = `translate(${x}px, ${y}px)`;
-          }
-        });
-      }
+      window.addEventListener('mousemove', (e) => {
+        if(window.innerWidth > 900) {
+          const x = (e.clientX / window.innerWidth - 0.5) * 15;
+          const y = (e.clientY / window.innerHeight - 0.5) * 15;
+          docImg.style.transform = `translate(${x}px, ${y}px)`;
+        }
+      });
 
       // 5. Persona Switcher (Without Techie)
       window.switchPersona = function(role) {
