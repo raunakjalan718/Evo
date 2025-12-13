@@ -4,9 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>EvoDoc - Your Intelligent Health Co-Pilot</title>
-  
-  <link rel="icon" href="https://media.githubusercontent.com/media/raunakjalan718/Evo/refs/heads/main/public/assets/favicon.svg">
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="public/assets/favicon.svg">
+  <link rel="stylesheet" href="public/css/style.css">
 </head>
 <body data-page="home">
   
@@ -22,7 +21,7 @@
 
   <header class="nav">
     <a href="#" class="brand hover-trigger">
-      <img src="https://media.githubusercontent.com/media/raunakjalan718/Evo/refs/heads/main/public/assets/logo.svg" alt="EvoDoc" class="logo">
+      <img src="public/assets/logo.svg" alt="EvoDoc" class="logo">
       <span>EVODOC</span>
     </a>
     <nav>
@@ -35,70 +34,70 @@
 
   <section class="hero">
     
-    <div class="hero-header">
-      <span class="hero-launch">LAUNCHING SOON</span>
+    <div class="hero-header-container">
+      <span class="hero-launch hover-trigger">LAUNCHING SOON</span>
       <div class="hero-meta">
         Know Test Tell • V1 2025
       </div>
     </div>
 
-    <div class="hero-body">
-      <div class="hero-wordmark">
-        <span class="hero-word">EVO</span>
-        <span class="hero-word">DOC</span>
-      </div>
+    <div class="hero-grid">
       
-      <div class="hero-figure parallax">
-        <img class="hero-doc" src="https://media.githubusercontent.com/media/raunakjalan718/Evo/refs/heads/main/public/assets/doc.png" alt="AI Doctor Assistant" />
-      </div>
-      
-      <div class="hero-card-dark reveal">
-        <h1>Your Intelligent<br>Clinical Co-Pilot</h1>
-        <p>
-          Like a tireless "Junior Doctor," EvoDoc analyzes symptoms, history, and medical logic 
-          to help you make faster, safer decisions. 
-          <strong>Designed to support doctors, not replace them.</strong>
-        </p>
-        <div class="hero-actions">
-          <a class="btn btn-primary hover-trigger" href="#demo">Try the Demo</a>
-          <a class="btn btn-ghost hover-trigger" href="#persona-section">How it Works</a>
+      <div class="hero-left reveal">
+        <div class="hero-card-dark">
+          <h1>Your Intelligent<br>Clinical Co-Pilot</h1>
+          <p>
+            EvoDoc acts like a tireless "Junior Doctor." It analyzes symptoms, patient history, 
+            and medical logic to help you make faster, safer decisions. 
+            <strong>Designed to support doctors, not replace them.</strong>
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary hover-trigger" href="#demo">Preview Demo</a>
+            <a class="btn btn-ghost hover-trigger" href="#persona-section">How it Works</a>
+          </div>
         </div>
       </div>
+
+      <div class="hero-right reveal">
+        <div class="hero-art-wrapper">
+          <img class="hero-art hover-trigger" src="public/assets/hero.png" alt="EvoDoc Artistic Vision" />
+        </div>
+      </div>
+
     </div>
-    
+
     <div class="scroll-cue">Scroll</div>
   </section>
 
   <section id="persona-section" class="section container reveal">
     <div style="text-align:center; margin-bottom:40px;">
-      <h3 style="color:#fff;">Tailored for your role</h3>
-      <p style="color:#aaa;">Select your perspective to see how EvoDoc helps you.</p>
+      <h3 style="color:#fff;">Healthcare isn't "One-Size-Fits-All"</h3>
+      <p style="color:#aaa;">See how EvoDoc works for you.</p>
       
       <div class="persona-tabs">
         <button class="tab-btn active hover-trigger" onclick="switchPersona('doctor')">🩺 For Doctors</button>
         <button class="tab-btn hover-trigger" onclick="switchPersona('patient')">❤️ For Patients</button>
-        <button class="tab-btn hover-trigger" onclick="switchPersona('techie')">⚡ For Techies</button>
       </div>
     </div>
 
     <div id="content-doctor" class="persona-content active">
       <div class="grid two">
         <div>
-          <h3 style="color:var(--neon-green)">The Clinical Dashboard</h3>
-          <p>EvoDoc pre-processes the patient interview, presenting you with a synthesized summary before you even enter the room.</p>
+          <h3 style="color:var(--neon-green)">The Full Picture</h3>
+          <p>Reviewing a patient's lifetime history in 10 minutes is impossible. EvoDoc does it instantly—finding the personalized details that standard treatments miss.</p>
           <ul class="checks">
-            <li><strong>Triage & Red Flags:</strong> Instant alerts for urgent patterns.</li>
-            <li><strong>Differential Ranking:</strong> Logic-based suggestions ranked by probability.</li>
-            <li><strong>Interaction Check:</strong> Auto-cross-references new prescriptions.</li>
+            <li><strong>Instant History:</strong> Recalls that a medication took 4 days to work last time, giving you context.</li>
+            <li><strong>Confidence:</strong> Validates your decisions against the patient's specific metabolic history.</li>
+            <li><strong>Safety Net:</strong> Automatically flags obscure allergies or interactions buried in old records.</li>
           </ul>
         </div>
         <div class="card glass">
           <div style="font-family:monospace; color:#ccc; font-size:0.9em;">
             > PATIENT: Male, 54<br>
-            > SYMPTOM: Chest Pain<br>
-            > <span style="color:var(--neon-green)">ALERT:</span> History of Asthma<br>
-            > SUGGESTION: <strong>Angina (Stable)</strong><br>
-            > ACTION: Request ECG + Troponin.
+            > RX REQUEST: <span style="color:var(--neon-green)">Pain Relief (Standard)</span><br>
+            > <span style="color:var(--neon-green)">NOTE:</span> Patient has delayed metabolic response.<br>
+            > HISTORY: 2019 records show slow reaction to standard dose.<br>
+            > SUGGESTION: Consider modified dosage strategy.
           </div>
         </div>
       </div>
@@ -107,41 +106,21 @@
     <div id="content-patient" class="persona-content" style="display:none;">
       <div class="grid two">
         <div>
-          <h3 style="color:#fff;">Your Health Translator</h3>
-          <p>Stop googling symptoms and getting scared. EvoDoc explains your health in plain English.</p>
+          <h3 style="color:#fff;">Care That Knows You</h3>
+          <p>Your body is unique. Medicines that work for others might not work for you. EvoDoc helps your doctor see <em>you</em>, not just a statistic.</p>
           <ul class="checks">
-            <li><strong>Clear Explanations:</strong> No confusing jargon.</li>
-            <li><strong>Preparation:</strong> Tells you exactly what to ask your doctor.</li>
-            <li><strong>Safety Net:</strong> Reminds you of allergies if a new med is suggested.</li>
+            <li><strong>Personalized Safety:</strong> Helps avoid medicines that previously gave you bad reactions.</li>
+            <li><strong>Your Health History:</strong> Keeps track of what worked and what didn't, so you don't have to remember everything.</li>
+            <li><strong>Better Treatments:</strong> Helps doctors choose the medicine that fits your body best.</li>
           </ul>
         </div>
         <div class="card glass">
           <div style="color:#fff;">
-            <p style="opacity:0.7; font-size:0.9em;">EvoDoc says:</p>
-            <p style="font-size:1.1em; margin-top:5px;">"It sounds like <strong>Acid Reflux</strong>."</p>
-            <p style="line-height:1.4; font-size:0.95em;">Your pain happens after eating. This is usually not dangerous, but avoid spicy food tonight.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="content-techie" class="persona-content" style="display:none;">
-      <div class="grid two">
-        <div>
-          <h3 style="color:#aaa;">The Logic Engine</h3>
-          <p>We use deterministic vector logic on structured knowledge graphs, not black-box hallucinations.</p>
-          <ul class="checks">
-            <li><strong>Local-First:</strong> Runs on-device via ONNX Runtime.</li>
-            <li><strong>Structure:</strong> Hybrid NLP + Graph logic.</li>
-            <li><strong>Privacy:</strong> Data never leaves the client without consent.</li>
-          </ul>
-        </div>
-        <div class="card" style="border:1px solid #555;">
-          <div style="color:#0f0; font-family:monospace; font-size:0.9em;">
-            // LOGIC TRACE<br>
-            INPUT: [sym_cough, sym_fever]<br>
-            > VECTOR_MATCH: "Viral URI" (0.82)<br>
-            > OUTPUT: Code Green (Monitor)
+            <p style="opacity:0.7; font-size:0.9em;">EvoDoc Insight:</p>
+            <p style="font-size:1.1em; margin-top:5px;">"This prescription matches your profile."</p>
+            <p style="line-height:1.4; font-size:0.95em;">
+              Unlike last time, this medication fits your allergy profile and history of rapid recovery.
+            </p>
           </div>
         </div>
       </div>
@@ -151,11 +130,11 @@
   <section id="demo" class="section container reveal">
     <div style="text-align:center; max-width:800px; margin:0 auto;">
       <h3>Try the Logic</h3>
-      <p style="color:#aaa; margin-bottom:30px;">This is a live test. Enter symptoms to see how EvoDoc thinks.</p>
+      <p style="color:#aaa; margin-bottom:30px;">See how EvoDoc connects the dots.</p>
       
       <div class="card">
         <label class="input-label" style="display:block; text-align:left; color:var(--neon-green); font-size:0.8rem; margin-bottom:5px;">ENTER SYMPTOMS</label>
-        <input id="symptomsInput" class="input hover-trigger" placeholder="e.g. Headache, sensitivity to light, nausea">
+        <input id="symptomsInput" class="input hover-trigger" placeholder="e.g. Headache, chest pain, fever">
         
         <div class="demo-actions" style="margin-top:20px; display:flex; gap:10px;">
           <button id="demoSuggest" class="btn btn-primary hover-trigger" style="flex:1;">Run Analysis</button>
@@ -206,10 +185,10 @@
       }, { threshold: 0.1 });
       qa('.reveal').forEach(el => io.observe(el));
 
-      // 3. CURSOR & CANVAS TRAIL
+      // 3. CANVAS CURSOR TRAIL (Optimized)
       const cursor = q('#cursor');
       const cvs = q('#cursorTrail');
-      const triggers = qa('.hover-trigger'); // Elements that expand cursor
+      const triggers = qa('.hover-trigger');
 
       if(cursor && cvs) {
         const ctx = cvs.getContext('2d');
@@ -225,7 +204,6 @@
         window.addEventListener('resize', resize);
         resize();
 
-        // Mouse Move
         window.addEventListener('mousemove', e => {
           const x = e.clientX;
           const y = e.clientY;
@@ -241,7 +219,7 @@
           });
         });
 
-        // Interactive Hover
+        // Hover Animations
         triggers.forEach(el => {
           el.addEventListener('mouseenter', () => cursor.classList.add('active'));
           el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
@@ -252,7 +230,8 @@
           ctx.clearRect(0, 0, width, height);
           for(let i = 0; i < particles.length; i++) {
             let p = particles[i];
-            p.x += p.vx; p.y += p.vy;
+            p.x += p.vx;
+            p.y += p.vy;
             p.life -= 0.02; 
             
             if(p.life > 0) {
@@ -272,15 +251,17 @@
 
       // 4. Parallax Effect
       const docImg = q('.hero-doc');
-      window.addEventListener('mousemove', (e) => {
-        if(window.innerWidth > 900) {
-          const x = (e.clientX / window.innerWidth - 0.5) * 15;
-          const y = (e.clientY / window.innerHeight - 0.5) * 15;
-          docImg.style.transform = `translate(${x}px, ${y}px)`;
-        }
-      });
+      if(docImg) {
+        window.addEventListener('mousemove', (e) => {
+          if(window.innerWidth > 900) {
+            const x = (e.clientX / window.innerWidth - 0.5) * 15;
+            const y = (e.clientY / window.innerHeight - 0.5) * 15;
+            docImg.style.transform = `translate(${x}px, ${y}px)`;
+          }
+        });
+      }
 
-      // 5. Persona Switcher
+      // 5. Persona Switcher (Without Techie)
       window.switchPersona = function(role) {
         qa('.tab-btn').forEach(btn => btn.classList.remove('active'));
         event.currentTarget.classList.add('active');
@@ -301,16 +282,16 @@
       const demoRes = q('#demoResults');
       
       const MOCK_DATA = {
-        "headache": { dx: "Migraine", conf: "85%", next: "Rest in dark room, hydration." },
-        "chest": { dx: "Angina", conf: "70%", next: "Immediate ECG required." },
-        "fever": { dx: "Viral Infection", conf: "60%", next: "Monitor temperature." }
+        "headache": { dx: "Migraine Pattern", conf: "85%", next: "Rest in dark room. History suggests caffeine sensitivity." },
+        "chest": { dx: "Angina Risk", conf: "70%", next: "Immediate ECG. Matches family history of cardiac issues." },
+        "fever": { dx: "Viral Infection", conf: "60%", next: "Monitor. Your past recovery time suggests 3-4 days." }
       };
 
       if(demoBtn) {
         demoBtn.addEventListener('click', () => {
           const val = demoIn.value.toLowerCase();
           if(!val) return;
-          demoRes.innerHTML = `<div style="color:var(--neon-green)">Analyzing...</div>`;
+          demoRes.innerHTML = `<div style="color:var(--neon-green)">Scanning History...</div>`;
           
           setTimeout(() => {
             let match = null;
@@ -321,12 +302,12 @@
                 <div style="background:rgba(255,255,255,0.1); padding:15px; border-radius:10px;">
                   <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
                     <strong style="color:var(--neon-green);">${match.dx}</strong>
-                    <span style="font-size:0.8em; border:1px solid #555; padding:2px 8px; border-radius:10px;">${match.conf}</span>
+                    <span style="font-size:0.8em; border:1px solid #555; padding:2px 8px; border-radius:10px;">${match.conf} Match</span>
                   </div>
-                  <div style="font-size:0.9em; color:#ddd;">Suggestion: ${match.next}</div>
+                  <div style="font-size:0.9em; color:#ddd;">Insight: ${match.next}</div>
                 </div>`;
             } else {
-              demoRes.innerHTML = `<div style="color:#aaa;">Complex pattern detected. Clinical review recommended.</div>`;
+              demoRes.innerHTML = `<div style="color:#aaa;">Analyzing full context... Clinical review recommended.</div>`;
             }
           }, 800);
         });

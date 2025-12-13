@@ -2,18 +2,18 @@
    1. THEME & VARIABLES
    ========================================= */
 :root {
-  --neon-green: #e1ff00;
-  --dark-olive: #4a503d;
-  --deep-black: #1b1e16;
+  --neon-green: #e1ff00;       /* Signature Yellow */
+  --charcoal: #121416;         /* Deep Dark Background */
   --text-light: #ffffff;
+  --text-dark: #000000;
   
-  --bg: var(--deep-black);
+  --bg: var(--charcoal);
   --fg: var(--text-light);
   
   /* Glassmorphism */
   --card-bg: rgba(20, 25, 20, 0.6); 
   --card-stroke: rgba(255, 255, 255, 0.1);
-  --card-dark: #111;
+  --card-dark: #0a0a0a;
   
   --radius: 16px;
   --shadow: 0 20px 60px rgba(0,0,0,0.6);
@@ -28,8 +28,8 @@
 
 html, body {
   margin: 0; padding: 0;
-  background: radial-gradient(circle at 50% 30%, var(--dark-olive) 0%, var(--deep-black) 80%);
-  background-attachment: fixed;
+  background-color: var(--charcoal);
+  background-image: radial-gradient(circle at 50% 0%, #1e221b 0%, var(--charcoal) 60%);
   color: var(--fg);
   font-family: InterVar, system-ui, -apple-system, sans-serif;
   font-size: 18px;
@@ -37,7 +37,7 @@ html, body {
   min-height: 100vh;
   overflow-x: hidden;
   -webkit-text-size-adjust: 100%;
-  cursor: none; /* Hide default cursor */
+  cursor: none;
 }
 
 /* Noise Texture */
@@ -47,13 +47,13 @@ body::before {
   pointer-events: none; z-index: -1; opacity: 0.4;
 }
 
-::selection { background: var(--neon-green); color: var(--deep-black); }
+::selection { background: var(--neon-green); color: var(--text-dark); }
 * { box-sizing: border-box; }
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; transition: opacity 0.2s; cursor: none; }
 
 /* =========================================
-   2. LAYOUT UTILITIES
+   2. UTILITIES
    ========================================= */
 .container { width: min(1200px, 92vw); margin: 0 auto; }
 .section { padding: 100px 0; }
@@ -61,8 +61,8 @@ a { color: inherit; text-decoration: none; transition: opacity 0.2s; cursor: non
 .section p { color: rgba(255, 255, 255, 0.7); }
 
 .grid { display: grid; gap: 24px; }
-.grid.two { grid-template-columns: repeat(2, 1fr); }
-.grid.three { grid-template-columns: repeat(3, 1fr); }
+.grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
 @media (max-width: 900px) {
   .grid.two, .grid.three { grid-template-columns: 1fr; } 
@@ -87,14 +87,10 @@ a { color: inherit; text-decoration: none; transition: opacity 0.2s; cursor: non
 .brand:hover .logo { transform: rotate(90deg); }
 
 .nav nav { display: flex; gap: 25px; margin-left: 20px; }
-.nav nav a { 
-  color: #000; font-weight: 700; font-size: 13px; 
-  text-transform: uppercase; position: relative; 
-}
-/* Nav Link Animation */
+.nav nav a { color: #000; font-weight: 700; font-size: 13px; text-transform: uppercase; position: relative; }
 .nav nav a::after {
-  content: ''; position: absolute; width: 0; height: 2px;
-  bottom: -4px; left: 0; background: #000; transition: width 0.3s;
+  content:''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0;
+  background-color: #000; transition: width 0.3s;
 }
 .nav nav a:hover::after { width: 100%; }
 
@@ -104,115 +100,135 @@ a { color: inherit; text-decoration: none; transition: opacity 0.2s; cursor: non
 }
 
 /* =========================================
-   4. HERO SECTION (Adjusted Size & Spacing)
+   4. HERO SECTION (Left Text / Right Image)
    ========================================= */
 .hero {
   position: relative; width: 100%;
-  display: flex; flex-direction: column; align-items: center;
-  /* Reduced top padding (was 60px) to bring elements closer to nav */
-  padding-top: 30px; 
-  padding-bottom: 120px;
+  /* Padding top/bottom */
+  padding: 40px 0 100px;
   overflow: hidden;
 }
 
-/* 1. Header Labels */
-.hero-header {
+/* Header Labels (Full Width Container) */
+.hero-header-container {
+  width: 90%; max-width: 1400px; margin: 0 auto 30px; 
   display: flex; justify-content: space-between; align-items: center;
-  width: 90%; max-width: 1400px;
-  /* Reduced bottom margin to pull text closer */
-  margin-bottom: 10px; 
   position: relative; z-index: 5;
 }
 .hero-launch {
-  color: #000; font-weight: 800; background: var(--neon-green);
+  /* Glassy Transparent Badge */
+  background: rgba(225, 255, 0, 0.1); 
+  border: 1px solid rgba(225, 255, 0, 0.3);
+  backdrop-filter: blur(5px);
+  color: var(--neon-green);
   padding: 6px 16px; border-radius: 99px; font-size: 12px;
-  letter-spacing: 0.1em; box-shadow: 0 0 15px rgba(225, 255, 0, 0.4);
-  animation: pulseBadge 2s infinite;
+  letter-spacing: 0.1em;
+  animation: glowPulse 3s infinite ease-in-out;
 }
 .hero-meta { 
   text-align: right; font-size: 0.85rem; color: rgba(255,255,255,0.8); 
   letter-spacing: 0.5px; font-weight: 500;
 }
 
-/* 2. Main Wrapper */
-.hero-body {
-  position: relative;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  width: 100%; flex-grow: 1;
-  /* Spacing between badges and giant text */
-  margin-top: 10px; 
+/* Main Grid Layout: Left Text / Right Image */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  gap: 40px;
+  width: 90%; max-width: 1400px;
+  margin: 0 auto;
+  align-items: center; /* Vertically center */
+  position: relative; z-index: 1;
 }
 
-/* 3. Giant Background Text (Resized) */
-.hero-wordmark {
-  position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);
-  display: flex; gap: 20px; z-index: 1;
-  pointer-events: none;
-}
-.hero-word {
-  /* Reduced from 26vw to 18vw to fit better */
-  font-size: 18vw; 
-  font-weight: 900; line-height: 0.8;
-  color: transparent; -webkit-text-stroke: 2px var(--neon-green);
-  opacity: 0.6;
-  transition: transform 0.1s ease-out;
+/* LEFT COLUMN: Text/Card */
+.hero-left {
+  display: flex; justify-content: flex-start;
 }
 
-/* 4. Doctor Image */
-.hero-figure {
-  position: relative; z-index: 5;
-  width: min(380px, 75vw); /* Slightly smaller max width */
-  margin-top: -40px; 
-  transition: transform 0.1s ease-out;
-}
-.hero-doc {
-  width: 100%; filter: drop-shadow(0 30px 60px rgba(0,0,0,0.8));
-}
-
-/* 5. Floating Dark Card */
 .hero-card-dark {
-  /* Spacing: Overlaps doctor's feet slightly */
-  margin-top: -60px; 
+  position: relative;
   background-color: var(--card-dark);
-  padding: 40px 60px;
+  padding: 40px 50px;
   border-radius: 20px;
-  text-align: center;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.9);
-  border: 1px solid rgba(255,255,255,0.1);
-  max-width: 600px; width: 90%;
-  position: relative; z-index: 10;
+  text-align: left; /* Align text left */
+  /* Soft glow instead of hard shadow */
+  box-shadow: 0 0 60px rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.05);
+  z-index: 20;
+  width: 100%; max-width: 600px;
+  backdrop-filter: blur(20px);
   transition: transform 0.3s, box-shadow 0.3s;
 }
-.hero-card-dark:hover { 
-  transform: translateY(-5px); 
-  box-shadow: 0 30px 80px rgba(0,0,0,1); 
-}
+.hero-card-dark:hover { transform: translateY(-5px); box-shadow: 0 10px 80px rgba(0,0,0,0.8); }
 
 .hero-card-dark h1 {
-  color: #fff; font-size: 2rem; font-weight: 700; margin: 0 0 15px 0; line-height: 1.2;
+  color: #fff; font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; 
+  margin: 0 0 20px 0; line-height: 1.1;
 }
 .hero-card-dark p {
-  color: rgba(255,255,255,0.7); font-size: 1rem; margin-bottom: 30px;
+  color: rgba(255,255,255,0.7); font-size: 1.1rem; margin-bottom: 30px;
 }
-.hero-actions { display: flex; justify-content: center; gap: 15px; }
+.hero-actions { display: flex; justify-content: flex-start; gap: 15px; }
 
-/* Scroll Cue */
-.scroll-cue {
-  color: var(--neon-green); position: absolute; bottom: 20px; left: 50%;
-  transform: translateX(-50%); text-transform: uppercase; font-size: 0.8rem; opacity: 0.8;
-  animation: fadeUp 2s infinite;
+/* RIGHT COLUMN: Artistic Image */
+.hero-right {
+  display: flex; justify-content: center; /* Center image in column */
+  position: relative;
 }
 
-/* Mobile Adjustments */
-@media (max-width: 768px) {
-  .hero-word { font-size: 24vw; /* Larger relatively on mobile */ }
-  .hero-wordmark { flex-direction: column; gap: 0; align-items: center; top: 35%; }
-  .hero-header { flex-direction: column; align-items: center; gap: 10px; margin-bottom: 30px; }
-  .hero-doc { width: 80%; max-width: 300px; }
-  .hero-card-dark { padding: 30px 20px; margin-top: -20px; }
-  .hero-actions { flex-direction: column; width: 100%; }
+.hero-art-wrapper {
+  position: relative;
+  width: 100%; max-width: 650px;
+  /* Continuous Floating Animation */
+  animation: floatContinuous 6s ease-in-out infinite;
+}
+
+.hero-art {
+  width: 100%; height: auto;
+  border-radius: 24px;
+  /* BLENDING & TRANSPARENCY */
+  opacity: 0.9; /* Slight transparency */
+  box-shadow: none; /* Removed hard shadow to blend better */
+  border: none; /* Removed border */
+  /* Fade the bottom edge into the dark background */
+  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 98%);
+  mask-image: linear-gradient(to bottom, black 60%, transparent 98%);
+  
+  /* Entrance Animation */
+  animation: fadeScaleJump 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transform-origin: center center;
+}
+
+/* NEW HERO ANIMATIONS */
+@keyframes floatContinuous {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes fadeScaleJump {
+  from { opacity: 0; transform: scale(0.9) translateX(30px); }
+  to { opacity: 0.9; transform: scale(1) translateX(0); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 10px rgba(225, 255, 0, 0.1); border-color: rgba(225,255,0,0.3); }
+  50% { box-shadow: 0 0 25px rgba(225, 255, 0, 0.3); border-color: rgba(225,255,0,0.6); }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 900px) {
+  .hero-grid { 
+    grid-template-columns: 1fr; /* Stack vertically */
+    text-align: center;
+    gap: 30px;
+  }
+  .hero-left { order: 2; justify-content: center; } /* Text below image */
+  .hero-right { order: 1; } /* Image on top */
+  
+  .hero-card-dark { text-align: center; padding: 30px 20px; }
+  .hero-actions { justify-content: center; flex-direction: column; width: 100%; }
   .hero-actions .btn { width: 100%; }
-  .hero-meta { text-align: center; }
 }
 
 /* =========================================
@@ -238,7 +254,7 @@ a { color: inherit; text-decoration: none; transition: opacity 0.2s; cursor: non
 .persona-content { animation: fadeUp 0.5s ease; }
 
 /* =========================================
-   6. COMPONENTS (Cards, Buttons)
+   6. COMPONENTS
    ========================================= */
 .card {
   background: var(--card-bg);
@@ -292,11 +308,10 @@ a { color: inherit; text-decoration: none; transition: opacity 0.2s; cursor: non
   animation: spin 1s linear infinite; margin: 0 auto 15px;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
-@keyframes pulseBadge { 0%{ transform: scale(1); } 50%{ transform: scale(1.05); } 100%{ transform: scale(1); } }
 
 /* Custom Cursor */
 .cursor { 
-  position: fixed; width: 14px; height: 14px; 
+  position: fixed; width: 12px; height: 12px; 
   background: var(--neon-green); border-radius: 50%; 
   pointer-events: none; z-index: 5000; mix-blend-mode: exclusion;
   transform: translate(-50%,-50%); transition: width 0.2s, height 0.2s;
@@ -304,9 +319,11 @@ a { color: inherit; text-decoration: none; transition: opacity 0.2s; cursor: non
 .cursor.active { width: 30px; height: 30px; background: #fff; mix-blend-mode: difference; }
 #cursorTrail { position: fixed; inset: 0; pointer-events: none; z-index: 4999; }
 
-/* General Animations */
-@keyframes fadeUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+.scroll-cue {
+  color: var(--neon-green); position: absolute; bottom: 20px; left: 50%;
+  transform: translateX(-50%); text-transform: uppercase; font-size: 0.8rem; opacity: 0.8;
+  animation: fadeUp 2s infinite;
+}
 .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .reveal.visible { opacity: 1; transform: translateY(0); }
-.hover-rise { transition: transform 0.2s; }
-.hover-rise:hover { transform: translateY(-5px); }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
