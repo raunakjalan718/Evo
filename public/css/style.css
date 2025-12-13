@@ -2,16 +2,16 @@
    1. THEME & VARIABLES
    ========================================= */
 :root {
-  --neon-green: #e1ff00;
-  --dark-olive: #4a503d;
-  --deep-black: #1b1e16;
+  --neon-green: #e1ff00;       /* Signature Yellow */
+  --charcoal: #121416;         /* Deep Dark Background */
   --text-light: #ffffff;
   
-  --bg: var(--deep-black);
+  --bg: var(--charcoal);
   --fg: var(--text-light);
   
   --card-bg: rgba(20, 25, 20, 0.6); 
   --card-stroke: rgba(255, 255, 255, 0.1);
+  --card-dark: #0a0a0a;
   
   --radius: 16px;
   --shadow: 0 20px 60px rgba(0,0,0,0.6);
@@ -26,25 +26,26 @@
 
 html, body {
   margin: 0; padding: 0;
-  background: radial-gradient(circle at 50% 30%, var(--dark-olive) 0%, var(--deep-black) 80%);
-  background-attachment: fixed;
+  background-color: var(--charcoal);
+  background-image: radial-gradient(circle at 50% 0%, #1e221b 0%, var(--charcoal) 60%);
   color: var(--fg);
   font-family: InterVar, system-ui, -apple-system, sans-serif;
-  font-size: 19px;
-  line-height: 1.7;
+  font-size: 18px;
+  line-height: 1.6;
   min-height: 100vh;
   overflow-x: hidden;
-  cursor: none;
+  -webkit-text-size-adjust: 100%;
+  cursor: none; /* Custom cursor */
 }
 
-/* Noise Texture */
+/* Texture Overlay */
 body::before {
   content: ""; position: fixed; inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
   pointer-events: none; z-index: -1; opacity: 0.4;
 }
 
-::selection { background: var(--neon-green); color: var(--deep-black); }
+::selection { background: var(--neon-green); color: #000; }
 * { box-sizing: border-box; }
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; transition: opacity 0.2s; cursor: none; }
@@ -54,7 +55,7 @@ a { color: inherit; text-decoration: none; transition: opacity 0.2s; cursor: non
    ========================================= */
 .container { width: min(1200px, 92vw); margin: 0 auto; }
 .section { padding: 100px 0; }
-.section h3 { color: var(--neon-green); font-size: clamp(24px, 4vw, 32px); margin-bottom: 24px; }
+.section h3 { color: var(--neon-green); font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom: 20px; }
 .section p { color: rgba(255, 255, 255, 0.7); }
 
 .grid { display: grid; gap: 24px; }
@@ -78,15 +79,22 @@ a { color: inherit; text-decoration: none; transition: opacity 0.2s; cursor: non
 }
 .nav .brand {
   display: flex; gap: 10px; align-items: center;
-  font-weight: 900; color: #000; font-size: 18px; letter-spacing: 0.5px;
+  font-weight: 900; color: #000; font-size: 20px; letter-spacing: 0.5px;
 }
-.nav .logo { width: 24px; }
-.nav nav { display: flex; gap: 25px; margin-left: 20px; }
+.nav .logo { width: 26px; transition: transform 0.3s; }
+.brand:hover .logo { transform: rotate(15deg); }
+
+.nav nav { display: flex; gap: 30px; margin-left: 20px; }
 .nav nav a { 
-  padding: 8px 14px; border-radius: 99px; color: #000;
-  font-weight: 700; font-size: 14px; transition: all 0.2s;
+  color: #000; font-weight: 800;
+  font-size: 15px;
+  text-transform: uppercase; position: relative; letter-spacing: 0.5px;
 }
-.nav nav a:hover { background: rgba(0,0,0,0.1); }
+.nav nav a::after {
+  content:''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0;
+  background-color: #000; transition: width 0.3s;
+}
+.nav nav a:hover::after { width: 100%; }
 
 @media (max-width: 768px) {
   .nav { padding: 15px 20px; }
@@ -94,94 +102,103 @@ a { color: inherit; text-decoration: none; transition: opacity 0.2s; cursor: non
 }
 
 /* =========================================
-   4. HERO SECTION (Base Design: Centered)
+   4. HERO SECTION (Original Design: Centered Doctor)
    ========================================= */
 .hero {
-  /* UPDATED: Reduced top padding to pull elements closer to nav */
-  padding: clamp(30px, 5vh, 60px) 0 120px;
-  display: flex; justify-content: center;
-  position: relative; isolation: isolate; overflow: hidden;
+  position: relative; width: 100%;
+  display: flex; flex-direction: column; align-items: center;
+  padding-top: 40px; 
+  padding-bottom: 120px;
+  overflow: hidden;
 }
 
-.hero-card {
-  width: 100%; max-width: 1400px;
-  background: transparent; box-shadow: none; border: none;
-  padding: clamp(30px, 5vw, 80px);
-  position: relative; margin: 0 auto;
-}
-
+/* 1. Header Labels */
 .hero-header {
-  display: flex; justify-content: space-between; width: 100%;
+  display: flex; justify-content: space-between; align-items: center;
+  width: 90%; max-width: 1400px;
+  margin-bottom: 15px; 
   position: relative; z-index: 5;
 }
-
 .hero-launch {
-  color: var(--deep-black); font-weight: 800; background: var(--neon-green);
+  color: #000; font-weight: 800; background: var(--neon-green);
   padding: 6px 16px; border-radius: 99px; font-size: 12px;
   letter-spacing: 0.1em; box-shadow: 0 0 15px rgba(225, 255, 0, 0.4);
+  animation: pulseBadge 2s infinite;
+}
+.hero-meta { 
+  text-align: right; font-size: 0.85rem; color: rgba(255,255,255,0.8); 
+  letter-spacing: 0.5px; font-weight: 500;
 }
 
-.hero-meta {
-  text-align: right; color: rgba(255,255,255,0.8); font-size: 0.8rem;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-}
-
+/* 2. Main Wrapper */
 .hero-body {
-  position: relative; z-index: 2;
-  display: flex; flex-direction: column; align-items: center; text-align: center;
-  gap: 40px; margin-top: 40px;
+  position: relative;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  width: 100%; flex-grow: 1;
+  margin-top: 10px; 
 }
 
-/* Giant Background Text */
+/* 3. Giant Background Text */
 .hero-wordmark {
-  position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
-  display: flex; justify-content: center; gap: 20px;
-  pointer-events: none; z-index: 0; width: 100%;
+  position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%);
+  display: flex; gap: 2vw; z-index: 1; pointer-events: none;
 }
-
 .hero-word {
-  /* UPDATED: Reduced font size */
-  font-size: clamp(60px, 18vw, 250px); 
+  /* Using outlined style based on your old design request */
+  /* REDUCED FONT SIZE from 26vw to 18vw */
+  font-size: 18vw; 
   font-weight: 900; line-height: 0.8;
-  color: rgba(225, 255, 0, 0.05);
-  -webkit-text-stroke: 3px rgba(225, 255, 0, 0.6);
-  filter: drop-shadow(0 0 20px rgba(225, 255, 0, 0.2));
+  color: transparent; 
+  -webkit-text-stroke: 3px var(--neon-green);
+  opacity: 0.6;
+  transition: transform 0.1s ease-out;
 }
 
+/* 4. Doctor Image */
 .hero-figure {
-  /* UPDATED: Reduced max width for the doctor */
-  width: min(320px, 75vw); 
-  margin: 0 auto;
-  position: relative; transition: transform 0.1s;
+  position: relative; z-index: 5;
+  width: min(380px, 75vw); 
+  margin-top: -60px; 
+  transition: transform 0.1s ease-out;
 }
-.hero-doc { 
-  width: 100%; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6)); 
+.hero-doc {
+  width: 100%; filter: drop-shadow(0 30px 60px rgba(0,0,0,0.8));
 }
 
-/* Info Card */
-.hero-info {
-  background: rgba(20, 20, 20, 0.6);
-  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-  padding: 30px; border-radius: 24px;
+/* 5. Floating Dark Card */
+.hero-card-dark {
+  margin-top: -70px; 
+  background-color: var(--card-dark);
+  padding: 40px 60px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.9);
   border: 1px solid rgba(255,255,255,0.1);
-  max-width: 600px; box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  max-width: 650px; width: 90%;
+  position: relative; z-index: 10;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
+.hero-card-dark:hover { transform: translateY(-5px); box-shadow: 0 30px 80px rgba(0,0,0,1); }
 
-.hero-heading {
-  margin: 0 0 16px; font-size: clamp(28px, 5vw, 46px);
-  color: var(--text-light); line-height: 1.1;
-  text-shadow: 0 0 20px rgba(0,0,0,0.5);
+.hero-card-dark h1 {
+  color: #fff; font-size: 2rem; font-weight: 700; margin: 0 0 15px 0; line-height: 1.2;
 }
-
-.hero-cta {
-  display: flex; gap: 12px; justify-content: center;
-  flex-wrap: wrap; margin-top: 24px;
+.hero-card-dark p {
+  color: rgba(255,255,255,0.7); font-size: 1.1rem; margin-bottom: 30px;
 }
+.hero-actions { display: flex; justify-content: center; gap: 15px; }
 
-.scroll-cue {
-  color: var(--neon-green); position: absolute; bottom: 20px; left: 50%;
-  transform: translateX(-50%); text-transform: uppercase; font-size: 0.8rem; opacity: 0.8;
-  animation: fadeUp 2s infinite;
+/* Mobile Optimizations */
+@media (max-width: 900px) {
+  /* REDUCED MOBILE FONT SIZE from 32vw to 24vw */
+  .hero-word { font-size: 24vw; -webkit-text-stroke-width: 2px; }
+  .hero-wordmark { flex-direction: column; gap: 0; align-items: center; top: 25%; }
+  .hero-header { flex-direction: column; align-items: center; gap: 10px; margin-bottom: 30px; }
+  .hero-doc { width: 80%; max-width: 300px; }
+  .hero-card-dark { padding: 30px 20px; margin-top: -20px; }
+  .hero-actions { flex-direction: column; width: 100%; }
+  .hero-actions .btn { width: 100%; }
+  .hero-meta { text-align: center; }
 }
 
 /* =========================================
@@ -189,22 +206,22 @@ a { color: inherit; text-decoration: none; transition: opacity 0.2s; cursor: non
    ========================================= */
 .persona-tabs {
   display: inline-flex; background: rgba(255,255,255,0.05);
-  padding: 5px; border-radius: 50px; gap: 5px; margin-top: 20px; 
+  padding: 6px; border-radius: 50px; gap: 8px; margin-top: 25px; 
   flex-wrap: wrap; justify-content: center;
 }
 .tab-btn {
   background: transparent; border: none; color: #888;
-  padding: 10px 25px; border-radius: 40px; cursor: pointer;
+  padding: 12px 30px; border-radius: 40px; cursor: pointer;
   font-weight: 700; font-size: 14px; transition: all 0.3s;
   display: flex; align-items: center; gap: 8px;
 }
 .tab-btn:hover { color: #fff; background: rgba(255,255,255,0.1); }
 .tab-btn.active { 
   background: var(--neon-green); color: #000; 
-  box-shadow: 0 0 15px rgba(225,255,0,0.3); transform: scale(1.05); 
+  box-shadow: 0 0 20px rgba(225,255,0,0.3); transform: scale(1.05); 
 }
 
-.persona-content { animation: fadeUp 0.5s ease; }
+.persona-content { animation: fadeUp 0.6s ease; }
 
 /* =========================================
    6. COMPONENTS
@@ -214,35 +231,45 @@ a { color: inherit; text-decoration: none; transition: opacity 0.2s; cursor: non
   border: 1px solid var(--card-stroke);
   border-radius: 14px; padding: 30px;
   backdrop-filter: blur(10px);
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+  border-color: rgba(255,255,255,0.3);
 }
 .glass { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.08); }
-.card h4 { color: var(--neon-green); margin-top: 0; font-size: 1.1rem; }
+.card h4 { color: var(--neon-green); margin-top: 0; font-size: 1.2rem; }
 
-.checks li { padding-left: 25px; position: relative; margin-bottom: 10px; color: #ddd; }
+.checks li { margin-bottom: 12px; padding-left: 25px; position: relative; color: #ccc; }
 .checks li::before { content: "✓"; position: absolute; left: 0; color: var(--neon-green); font-weight: bold; }
 
 .btn {
-  padding: 12px 30px; border-radius: 50px; font-weight: 700; cursor: pointer;
+  padding: 14px 32px; border-radius: 50px; font-weight: 700; cursor: pointer;
   border: none; font-size: 14px; text-transform: uppercase; text-decoration: none;
   display: inline-flex; align-items: center; justify-content: center;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
 }
-.btn-primary { background: var(--neon-green); color: #000; box-shadow: 0 0 15px rgba(225, 255, 0, 0.3); }
-.btn-primary:hover { background: #fff; transform: translateY(-2px); }
+.btn-primary { background: var(--neon-green); color: #000; }
+.btn-primary:hover { 
+  background: #fff; transform: translateY(-3px) scale(1.05); 
+  box-shadow: 0 10px 30px rgba(255,255,255,0.2); 
+}
 .btn-ghost { background: transparent; border: 1px solid var(--neon-green); color: var(--neon-green); }
-.btn-ghost:hover { background: rgba(225,255,0,0.1); }
+.btn-ghost:hover { background: rgba(225,255,0,0.1); transform: translateY(-3px); }
 
 .input {
-  width: 100%; padding: 12px; background: rgba(0,0,0,0.3);
+  width: 100%; padding: 14px; background: rgba(0,0,0,0.4);
   border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white;
-  margin-bottom: 10px; font-size: 16px;
+  margin-top: 8px; font-size: 16px; transition: border-color 0.2s, box-shadow 0.2s;
 }
-.input:focus { outline: 1px solid var(--neon-green); }
+.input:focus { outline: none; border-color: var(--neon-green); box-shadow: 0 0 10px rgba(225,255,0,0.1); }
 
-/* Loader & Cursor */
+/* Loader */
 .loader {
-  position: fixed; inset: 0; z-index: 999;
-  background: var(--deep-black); display: grid; place-items: center;
-  color: var(--neon-green); transition: opacity 0.5s;
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--charcoal); color: var(--neon-green);
+  display: grid; place-items: center; transition: opacity 0.5s;
 }
 .loader.hidden { opacity: 0; pointer-events: none; }
 .spinner {
@@ -251,27 +278,22 @@ a { color: inherit; text-decoration: none; transition: opacity 0.2s; cursor: non
   animation: spin 1s linear infinite; margin: 0 auto 15px;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pulseBadge { 0%{ transform: scale(1); } 50%{ transform: scale(1.05); } 100%{ transform: scale(1); } }
 
+/* Simple Cursor + Trail */
 .cursor { 
-  position: fixed; width: 12px; height: 12px; background: var(--neon-green);
-  border-radius: 50%; pointer-events: none; z-index: 5000; mix-blend-mode: exclusion;
-  transform: translate(-50%,-50%); transition: width 0.2s, height 0.2s;
+  position: fixed; width: 12px; height: 12px; 
+  background: var(--neon-green); border-radius: 50%; 
+  pointer-events: none; z-index: 5000; mix-blend-mode: exclusion;
+  transform: translate(-50%,-50%); 
 }
-.cursor.active { width: 30px; height: 30px; background: #fff; mix-blend-mode: difference; }
 #cursorTrail { position: fixed; inset: 0; pointer-events: none; z-index: 4999; }
 
-.reveal { opacity: 0; transform: translateY(20px); transition: 0.8s ease; }
+.scroll-cue {
+  color: var(--neon-green); position: absolute; bottom: 20px; left: 50%;
+  transform: translateX(-50%); text-transform: uppercase; font-size: 0.8rem; opacity: 0.8;
+  animation: fadeUp 2s infinite;
+}
+.reveal { opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-
-/* Mobile Overrides */
-@media (max-width: 768px) {
-  .hero-header { flex-direction: column; align-items: center; gap: 10px; }
-  .hero-meta { text-align: center; }
-  .hero-wordmark { flex-direction: column; gap: 0; top: 10%; }
-  .hero-word { font-size: 25vw; line-height: 0.85; }
-  .demo-actions { flex-direction: column; }
-  .demo-actions .btn { width: 100%; margin-bottom: 10px; }
-  .persona-tabs { flex-direction: column; width: 100%; }
-  .tab-btn { width: 100%; justify-content: center; }
-}

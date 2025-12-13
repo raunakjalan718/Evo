@@ -4,8 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>EvoDoc - Your Intelligent Health Co-Pilot</title>
-  <link rel="icon" href="public/assets/favicon.svg">
-  <link rel="stylesheet" href="public/css/style.css">
+  
+  <link rel="icon" href="https://media.githubusercontent.com/media/raunakjalan718/Evo/refs/heads/main/public/assets/favicon.svg">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body data-page="home">
   
@@ -21,7 +22,7 @@
 
   <header class="nav">
     <a href="#" class="brand hover-trigger">
-      <img src="public/assets/logo.svg" alt="EvoDoc" class="logo">
+      <img src="https://media.githubusercontent.com/media/raunakjalan718/Evo/refs/heads/main/public/assets/logo.svg" alt="EvoDoc" class="logo">
       <span>EVODOC</span>
     </a>
     <nav>
@@ -33,39 +34,38 @@
   </header>
 
   <section class="hero">
-    <div class="hero-card">
-      
-      <div class="hero-header">
-        <span class="hero-launch">LAUNCHING SOON</span>
-        <div class="hero-meta">
-          Know Test Tell • V1 2025
-        </div>
+    
+    <div class="hero-header">
+      <span class="hero-launch hover-trigger">LAUNCHING SOON</span>
+      <div class="hero-meta">
+        Know Test Tell • V1 2025
       </div>
+    </div>
 
-      <div class="hero-body">
-        <div class="hero-wordmark">
-          <span class="hero-word">EVO</span>
-          <span class="hero-word">DOC</span>
-        </div>
-        
-        <div class="hero-figure parallax">
-          <img class="hero-doc" src="public/assets/doc.png" alt="AI Doctor Assistant" />
-        </div>
-        
-        <div class="hero-info reveal">
-          <h1 class="hero-heading">Your Intelligent<br>Clinical Co-Pilot</h1>
-          <p>
-            EvoDoc acts like a tireless "Junior Doctor." It analyzes symptoms, patient history, 
-            and medical logic to help you make faster, safer decisions. 
-            <strong>Designed to support doctors, not replace them.</strong>
-          </p>
-          <div class="hero-cta">
-            <a class="btn btn-primary hover-trigger" href="#demo">Try the Demo</a>
-            <a class="btn btn-ghost hover-trigger" href="#persona-section">How it Works</a>
-          </div>
+    <div class="hero-body">
+      <div class="hero-wordmark">
+        <span class="hero-word">EVO</span>
+        <span class="hero-word">DOC</span>
+      </div>
+      
+      <div class="hero-figure parallax">
+        <img class="hero-doc" src="https://media.githubusercontent.com/media/raunakjalan718/Evo/refs/heads/main/public/assets/doc.png" alt="AI Doctor Assistant" />
+      </div>
+      
+      <div class="hero-card-dark reveal">
+        <h1>Your Intelligent<br>Clinical Co-Pilot</h1>
+        <p>
+          EvoDoc acts like a tireless "Junior Doctor." It analyzes symptoms, patient history, 
+          and medical logic to help you make faster, safer decisions. 
+          <strong>Designed to support doctors, not replace them.</strong>
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary hover-trigger" href="#demo">Preview Demo</a>
+          <a class="btn btn-ghost hover-trigger" href="#persona-section">How it Works</a>
         </div>
       </div>
     </div>
+    
     <div class="scroll-cue">Scroll</div>
   </section>
 
@@ -185,7 +185,7 @@
       }, { threshold: 0.1 });
       qa('.reveal').forEach(el => io.observe(el));
 
-      // 3. CANVAS CURSOR TRAIL (Optimized)
+      // 3. CANVAS CURSOR TRAIL
       const cursor = q('#cursor');
       const cvs = q('#cursorTrail');
       const triggers = qa('.hover-trigger');
@@ -219,13 +219,7 @@
           });
         });
 
-        // Hover Animations
-        triggers.forEach(el => {
-          el.addEventListener('mouseenter', () => cursor.classList.add('active'));
-          el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
-        });
-
-        // Animation Loop
+        // Loop for particles
         const animate = () => {
           ctx.clearRect(0, 0, width, height);
           for(let i = 0; i < particles.length; i++) {
@@ -249,7 +243,7 @@
         animate();
       }
 
-      // 4. Parallax Effect (Interactive)
+      // 4. Parallax Effect
       const docImg = q('.hero-doc');
       window.addEventListener('mousemove', (e) => {
         if(window.innerWidth > 900) {
@@ -259,7 +253,7 @@
         }
       });
 
-      // 5. Persona Switcher (Without Techie)
+      // 5. Persona Switcher
       window.switchPersona = function(role) {
         qa('.tab-btn').forEach(btn => btn.classList.remove('active'));
         event.currentTarget.classList.add('active');
